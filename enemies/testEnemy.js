@@ -15,9 +15,16 @@ class TestEnemy {
         // move 
         this.timer +=1; 
         this.pos.x += this.speed; 
+        // turn around periodically 
+        if (this.timer % 10 === 0){
+            let bullet = new EnemyBullet(this.pos.x,this.pos.y,player.x,player.y)
+        }
         if (this.timer >=100){
             this.speed *=-1 
             this.timer=0;
+            // check angle to player 
+            let angle = atan2(this.pos.y-player.y,this.pos.x-player.x)
+            // console.log(angle)
         }
     }
     show(){

@@ -34,7 +34,7 @@ class Bomb {
     checkExplode(){
         if (this.timer <= 0){
             // create explosions where the bomb is, then remove it from the explosions array 
-            makeExplosions(this.x,this.y,1,50)
+            makeExplosions(this.x,this.y,3,50)
             playerBombs = removeFromArray(this, playerBombs);
         }
     }

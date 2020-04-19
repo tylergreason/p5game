@@ -2,10 +2,8 @@ let filler = 255;
 function setup() {
   createCanvas(canvasWidth, canvasHeight)
   angleMode(DEGREES)
-
   // make new test enemy to test with 
-  let newTestEnemy = new TestEnemy(0,0,20); 
-  testEnemies.push(newTestEnemy)
+  let newTestEnemy = new TestEnemy(100,100,20); 
 }
 
 function draw() {
@@ -44,6 +42,11 @@ function draw() {
   for (let i = 0; i < testEnemies.length;i++){
     testEnemies[i].update(); 
     testEnemies[i].show();
+  }
+  // update enemy bullets 
+  for (let i = 0; i < enemyBullets.length; i++){
+    enemyBullets[i].update()
+    enemyBullets[i].show()
   }
   fill(filler)
   rect(200,200,100,150);
