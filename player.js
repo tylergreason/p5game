@@ -33,7 +33,7 @@ let player = {
 
 
 const drawPlayer = () =>{
-    rect(player.v.x,player.v.y,player.size,player.size); 
+    ellipse(player.v.x,player.v.y,player.size,player.size); 
     player.reloadCurrent +=1; 
     if (player.reloadCurrent > player.reloadMax){
         player.reloadCurrent=player.reloadMax
@@ -129,4 +129,10 @@ const shoot = (angle) => {
         new Bomb(player.x,player.y,xVector,yVector)
         // console.log(playerBombs)
     }
+}
+
+// function to check if player has been hit
+// assumes player is an ellipse for now 
+function hitPlayer(){
+
 }

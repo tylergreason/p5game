@@ -49,14 +49,15 @@ function draw() {
     enemyBullets[i].show()
   }
   fill(filler)
-  rect(200,200,100,150);
 
-	hit = collideRectRect(player.x,player.y,player.size,player.size,200,200,100,150);
-  if (hit){
-    filler=0; 
-  }else{
-    filler=255
-  }
+  // rect(200,200,100,150);
+
+	// hit = collideRectRect(player.x,player.y,player.size,player.size,200,200,100,150);
+  // if (hit){
+  //   filler=0; 
+  // }else{
+  //   filler=255
+  // }
 }
 
 // testing angles with mousePressed 

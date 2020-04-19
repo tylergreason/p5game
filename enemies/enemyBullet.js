@@ -4,8 +4,9 @@ class EnemyBullet{
         this.xOrigin=xOrigin,
         this.yOrigin=yOrigin,
         this.pos = createVector(this.xOrigin,this.yOrigin),
-        this.xDestination=xDestination,
-        this.yDestination=yDestination,
+        this.aimVariance = 10,
+        this.xDestination=xDestination+random(this.aimVariance*-1,this.aimVariance),
+        this.yDestination=yDestination+random(this.aimVariance*-1,this.aimVariance),
         this.speed=10,
         this.size=10,
         enemyBullets.push(this)
@@ -30,5 +31,6 @@ class EnemyBullet{
             enemyBullets = enemyBullets.filter(obj => obj !== this)
         }
     }
+    
 
 }
