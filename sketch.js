@@ -2,6 +2,10 @@ let filler = 255;
 function setup() {
   createCanvas(canvasWidth, canvasHeight)
   angleMode(DEGREES)
+
+  // make new test enemy to test with 
+  let newTestEnemy = new TestEnemy(0,0,20); 
+  testEnemies.push(newTestEnemy)
 }
 
 function draw() {
@@ -36,6 +40,11 @@ function draw() {
       explosions[i].update() 
     }
   }
+  // update enemies 
+  for (let i = 0; i < testEnemies.length;i++){
+    testEnemies[i].update(); 
+    testEnemies[i].show();
+  }
   fill(filler)
   rect(200,200,100,150);
 
@@ -61,7 +70,6 @@ function mousePressed(){
   //   let angle2 = atan2(mouseY - player.v.x, mouseX - player.v.y)
   //   console.log(`angle: ${angle2}`)
   //   shoot(angle2)
-  // pop()
-  
+  // pop()  
 }
 
