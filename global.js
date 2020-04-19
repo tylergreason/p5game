@@ -1,0 +1,39 @@
+const canvasWidth = 800; 
+const canvasHeight = 800; 
+const backgroundColor = () => { background(200,200,20) }
+
+const keyCodes = {
+    l:76, 
+    j:74, 
+    i:73, 
+    k:75,
+    d:68,
+    a:65,
+    s:83,
+    w:87
+}
+
+const keys = {
+    i:{keyCode:73, x:0,y:-1,deg:90},
+    l:{keyCode:76, x:1,y:0,deg:0},
+    k:{keyCode:75, x:0,y:1,deg:270},
+    j:{keyCode:74, x:-1,y:0,deg:180},
+    w:{keyCode:87, x:0,y:-1},
+    d:{keyCode:68, x:1,y:0},
+    s:{keyCode:83, x:0,y:1},
+    a:{keyCode:65, x:-1,y:0},
+}
+// object arrays 
+let playerBullets = [];
+let explosions = []; 
+
+// general function for removing item from array 
+function removeFromArray(item,array){
+    return array.filter(obj => obj !== item) 
+}
+
+function makeExplosions(x,y,qty,size){
+    for (let i = 0; i < qty; i++){
+        new Explosion(x,y,size);
+    }
+}
