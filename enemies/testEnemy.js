@@ -25,7 +25,7 @@ class TestEnemy {
             this.timer=0;
             this.changeMovement()
             // check angle to player 
-            let angle = atan2(this.pos.y-player.y,this.pos.x-player.x)
+            // let angle = atan2(this.pos.y-player.y,this.pos.x-player.x)
             // console.log(angle)
         }
     }
@@ -103,7 +103,7 @@ class TestEnemy {
     fire(){
         if (this.timer % 30 === 0){
             // fire bullet 
-            let bullet = new EnemyBullet(this.center().x,this.center().y,player.x,player.y)
+            // let bullet = new EnemyBullet(this.center().x,this.center().y,player.x,player.y)
         }
     }
 }

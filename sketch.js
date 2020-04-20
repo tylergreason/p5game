@@ -4,6 +4,8 @@ function setup() {
   angleMode(DEGREES)
   // make new test enemy to test with 
   let newTestEnemy = new TestEnemy(100,100,20); 
+  // make player 
+  let player = new Player(canvasWidth/2,canvasHeight/2)
 }
 
 function draw() {
@@ -12,13 +14,14 @@ function draw() {
     translate(random(0,0),random(0,0))
     backgroundColor()
     noStroke();
-    drawPlayerHealth()
     // remove stroke from everything before drawing 
     fill(0)
-    if (player.health > 0){
-      controls()
-      playerBounds()
-      drawPlayer()
+    // update players 
+    for (let i = 0; i < players.length;i++){
+      players[i].update() 
+      if (players[i]){
+        players[i].show()
+      }
     }
     // update playerBullets 
     for (let i = 0; i <= playerBullets.length-1;i++){
