@@ -2,10 +2,10 @@ const testEnemies = [];
 class TestEnemy { 
     constructor(x,y){
         this.pos = createVector(x,y),
-        this.speed = 2,
-        this.size=100,
+        this.speed = 5,
+        this.size=20,
         this.timer = 0,
-        this.angle=0,
+        this.angle=270,
         this.rotate=0,
         testEnemies.push(this)
     }
@@ -19,12 +19,9 @@ class TestEnemy {
         // move 
         this.timer +=1; 
         this.move()
+        this.fire()
         // turn around periodically 
-        if (this.timer % 30 === 0){
-            // fire bullet 
-            let bullet = new EnemyBullet(this.pos.x,this.pos.y,player.x,player.y)
-        }
-        if (this.timer >=50){
+        if (this.timer >=100){
             this.timer=0;
             this.changeMovement()
             // check angle to player 
@@ -33,7 +30,9 @@ class TestEnemy {
         }
     }
     changeMovement(){
-        this.angle = random(0,360)    
+        this.angle = random(0,360)   
+        console.log(this.angle) 
+        // this.angle = -90
     }
     
     // make function for moving enemy 
@@ -46,44 +45,65 @@ class TestEnemy {
         fill(255,0,0)
         push()
             translate(this.center().x,this.center().y)
+            fill(0)
             rotate(this.rotate) 
-            // I do noooot know why I need to subtract half of this object's size 
-            // to get it to draw centered, but that's what's needed. 
-
             ellipseMode(CENTER)
             rectMode(CENTER)
             rect(60,0,30,10)
             rect(-60,0,30,10)
             rect(0,60,10,30)
             rect(0,-60,10,30)
+            rotate(45)
+                rect(80,0,60,10)
+                    rotate(90)
+                    rect(80,0,60,10)
+                        rotate(90)
+                        rect(80,0,60,10)
+                            rotate(90)
+                            rect(80,0,60,10)
+            rotate(45)
             fill(0,0,255)
+            // this is the main body, drawn at 0,0 because we translated to that coordinate 
             ellipse(0,0,this.size,this.size)
-            
-            // drawing circles to look cool 
-            // fill(0,0,255) 
-            // rect(0-this.size-10, 0-this.size/2, 10,10)
-            // rect(0, 0-this.size/2, 10,10)
-            // rect(60,0, 10,10)
-            // rect(-0, -30, 10,10)
-            // rect(-0, -0, 10,10)
         pop()
         fill(0,255,0)
         rectMode(CENTER)
-        rect(this.pos.x+60,this.pos.y,10,10)
-        rect(this.pos.x+60,this.pos.y+60,10,10)
-        // rect(this.center().x,this.center().y,this.size-20,this.size-20)
+
+        // make rect to check borders 
+        // strokeWeight(1)
+        // stroke(1)
+        // fill(0)
+        // rect(this.center().x,this.center().y,this.size,this.size)
+        // fill(255,255,255)
+        // rect(this.center().x,this.center().y,10,10)
+
     }
     bounds(){
-        if(this.pos.x > canvasWidth-this.size || this.pos.x < 0+this.size || this.pos.y > canvasHeight-this.size || this.pos.y < 0+this.size){
-            this.pos.x = 200 
-            this.pos.y = 200
+        // collide right side bounds
+        if((this.center().x+this.size/2) > canvasWidth){
+            this.angle = random(91,269)
+        }
+        // collide left side bounds
+        if (this.center().x-this.size/2 < 0){
+            this.angle = random(271,449)
+        }
+        // collide bottom side bounds
+        if(this.center().y+this.size/2 > canvasHeight){
+            this.angle = random(181,359)
+        } 
+        // collide top side bounds
+        if (this.center().y-this.size/2 < 0){
+            this.angle = random(1,179)
         }
     }
     // increase rotation 
     rotateBody(){
-        if (this.rotate>=360){
-            this.rotate=0;
+        this.rotate+=3;
+    }
+    fire(){
+        if (this.timer % 30 === 0){
+            // fire bullet 
+            let bullet = new EnemyBullet(this.center().x,this.center().y,player.x,player.y)
         }
-        this.rotate+=20;
     }
 }

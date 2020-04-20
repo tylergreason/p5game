@@ -8,60 +8,61 @@ function setup() {
 
 function draw() {
   push()
-  translate(random(0,0),random(0,0))
-  backgroundColor()
-  noStroke();
-  drawPlayerHealth()
-  // remove stroke from everything before drawing 
-  fill(0)
-  if (player.health > 0){
-    controls()
-    playerBounds()
-    drawPlayer()
-  }
-  // update playerBullets 
-  for (let i = 0; i <= playerBullets.length-1;i++){
-    if (playerBullets[i]){
-      playerBullets[i].show();
-      playerBullets[i].update(); 
+    // sometime later, put an object in global called screenshake that has timer, amount attributes. Set the random values below to -amount,amount if the timer isn't at 0 or less, and 0 if it is. Then, when something needs to shake the screen, it can just set the screenshake objects value and timer. 
+    translate(random(0,0),random(0,0))
+    backgroundColor()
+    noStroke();
+    drawPlayerHealth()
+    // remove stroke from everything before drawing 
+    fill(0)
+    if (player.health > 0){
+      controls()
+      playerBounds()
+      drawPlayer()
     }
-  }
-  // update player bombs 
-  for (let i = 0; i <= playerBombs.length-1; i++){
-    if (playerBombs[i]){
-      playerBombs[i].show() 
-      playerBombs[i].update() 
+    // update playerBullets 
+    for (let i = 0; i <= playerBullets.length-1;i++){
+      if (playerBullets[i]){
+        playerBullets[i].show();
+        playerBullets[i].update(); 
+      }
     }
-  }
-  // update explosions
-  for (let i = 0; i <= explosions.length-1; i++){
-  if (explosions[i]){
-      explosions[i].show() 
-      explosions[i].update() 
+    // update player bombs 
+    for (let i = 0; i <= playerBombs.length-1; i++){
+      if (playerBombs[i]){
+        playerBombs[i].show() 
+        playerBombs[i].update() 
+      }
     }
-  }
-  // update enemies 
-  for (let i = 0; i < testEnemies.length;i++){
-    testEnemies[i].update(); 
-    testEnemies[i].show();
-  }
-  // update enemy bullets 
-  for (let i = 0; i < enemyBullets.length; i++){
-    enemyBullets[i].update()
-    if (enemyBullets[i]){
-      enemyBullets[i].show()
+    // update explosions
+    for (let i = 0; i <= explosions.length-1; i++){
+    if (explosions[i]){
+        explosions[i].show() 
+        explosions[i].update() 
+      }
     }
-  }
-  fill(filler)
+    // update enemies 
+    for (let i = 0; i < testEnemies.length;i++){
+      testEnemies[i].update(); 
+      testEnemies[i].show();
+    }
+    // update enemy bullets 
+    for (let i = 0; i < enemyBullets.length; i++){
+      enemyBullets[i].update()
+      if (enemyBullets[i]){
+        enemyBullets[i].show()
+      }
+    }
+    fill(filler)
 
-  // rect(200,200,100,150);
+    // rect(200,200,100,150);
 
-	// hit = collideRectRect(player.x,player.y,player.size,player.size,200,200,100,150);
-  // if (hit){
-  //   filler=0; 
-  // }else{
-  //   filler=255
-  // }
+    // hit = collideRectRect(player.x,player.y,player.size,player.size,200,200,100,150);
+    // if (hit){
+    //   filler=0; 
+    // }else{
+    //   filler=255
+    // }
   pop()
 }
 

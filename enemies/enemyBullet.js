@@ -4,12 +4,15 @@ class EnemyBullet{
         this.xOrigin=xOrigin,
         this.yOrigin=yOrigin,
         this.pos = createVector(this.xOrigin,this.yOrigin),
-        this.aimVariance = 10,
+        this.aimVariance = 50,
         this.xDestination=xDestination+random(this.aimVariance*-1,this.aimVariance),
         this.yDestination=yDestination+random(this.aimVariance*-1,this.aimVariance),
         this.speed=10,
         this.size=10,
         enemyBullets.push(this)
+    }
+    center(){
+        return createVector(this.pos.x+(this.size/2),this.pos.y+(this.size/2))
     }
     // find and return angle to travel at 
     angle(){
@@ -23,11 +26,23 @@ class EnemyBullet{
         this.pos.y+=sin(this.angle())*this.speed;
     }
     show(){
-        fill(0,0,0)
+        fill(200,0,0)
         ellipse(this.pos.x,this.pos.y,20,20)
     }
     bounds(){
-        if(this.pos.x > canvasWidth || this.pos.x < 0 || this.pos.y > canvasHeight || this.pos.y < 0){
+        if(
+            // collide right side bounds
+            (this.center().x+this.size/2) > canvasWidth
+            ||
+            // collide left side bounds
+            this.center().x-this.size/2 < 0
+            ||
+            // collide bottom side bounds
+            this.center().y+this.size/2 > canvasHeight
+            ||
+            // collide top side bounds
+            this.center().y-this.size/2 < 0
+        ){
             enemyBullets = enemyBullets.filter(obj => obj !== this)
         }
     }
