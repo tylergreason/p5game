@@ -9,8 +9,14 @@ class Player {
         this.speed = 5, 
         this.reloadMax = 5, 
         this.reloadCurrent = 3,
-        this.gunType = 'bomb',
+        this.gunType = 'bullet',
         players.push(this)
+    }
+    center(){
+        return {
+            x:this.pos.x+this.size/2,
+            y:this.pos.y+this.size/2
+        }
     }
     update(){
         this.controls()
@@ -103,11 +109,10 @@ class Player {
     }
     shoot = (angle) => {
         // given an angle, find the x and y vector the bullet should follow
-        // y is multiplied by -1 to account for computer screens basically being flipped 
         const xVector = cos(angle) 
         const yVector = sin(angle)
         if (this.gunType === 'bullet'){
-            new Bullet(this.centerX,this.centerY,xVector,yVector)
+            new Bullet(center(this).x,center(this).y,xVector,yVector)
         }
         if (this.gunType === 'bomb'){
             new Bomb(this.pos.x,this.pos.y,xVector,yVector)

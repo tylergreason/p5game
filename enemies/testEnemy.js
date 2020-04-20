@@ -103,7 +103,7 @@ class TestEnemy {
     fire(){
         if (this.timer % 30 === 0){
             // fire bullet 
-            // let bullet = new EnemyBullet(this.center().x,this.center().y,player.x,player.y)
+            let bullet = new EnemyBullet(center(this).x,center(this).y,player.pos.x,player.pos.y)
         }
     }
 }

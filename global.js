@@ -1,7 +1,7 @@
 const canvasWidth = 800; 
 const canvasHeight = 800; 
 const backgroundColor = () => { background(200,200,20) }
-
+let player=''; 
 const keyCodes = {
     l:76, 
     j:74, 
@@ -35,5 +35,12 @@ function removeFromArray(item,array){
 function makeExplosions(x,y,qty,size){
     for (let i = 0; i < qty; i++){
         new Explosion(x,y,size);
+    }
+}
+
+const center = obj => {
+    return {
+        x:obj.pos.x+(obj.size/2),
+        y:obj.pos.y+(obj.size/2)
     }
 }

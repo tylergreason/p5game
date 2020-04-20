@@ -1,7 +1,5 @@
 class Bullet{ 
     constructor(x,y,xVel,yVel){
-        this.x = x; 
-        this.y = y;
         this.pos = createVector(x,y)
         this.xVel=xVel;
         this.yVel=yVel;
@@ -27,6 +25,7 @@ class Bullet{
         this.pos.y+=this.yVel*this.speed;
         // debugger
         noStroke();
+        // ellipseMode(CENTER)
         ellipse(this.pos.x,this.pos.y,this.size,this.size)
     }
 

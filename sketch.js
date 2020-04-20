@@ -1,11 +1,11 @@
-let filler = 255;
 function setup() {
   createCanvas(canvasWidth, canvasHeight)
   angleMode(DEGREES)
-  // make new test enemy to test with 
-  let newTestEnemy = new TestEnemy(100,100,20); 
   // make player 
-  let player = new Player(canvasWidth/2,canvasHeight/2)
+  new Player(canvasWidth/2,canvasHeight/2)
+  player = players[0]
+  // make new test enemy to test with 
+  new TestEnemy(100,100,20); 
 }
 
 function draw() {
@@ -60,16 +60,6 @@ function draw() {
         enemyBullets[i].show()
       }
     }
-    fill(filler)
-
-    // rect(200,200,100,150);
-
-    // hit = collideRectRect(player.x,player.y,player.size,player.size,200,200,100,150);
-    // if (hit){
-    //   filler=0; 
-    // }else{
-    //   filler=255
-    // }
   pop()
 }
 
