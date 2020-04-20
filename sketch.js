@@ -6,6 +6,7 @@ function setup() {
   player = players[0]
   // make new test enemy to test with 
   new TestEnemy(100,100,20); 
+  new TestEnemy(100,100,20); 
 }
 
 function draw() {
@@ -16,9 +17,7 @@ function draw() {
     // remove stroke from everything before drawing 
     fill(0)
     // update players 
-    for (let i = 0; i < players.length;i++){
-      players[i].update() 
-    }
+    players.forEach(player => player.update())
     // update playerBullets 
     for (let i = 0; i <= playerBullets.length-1;i++){
       if (playerBullets[i]){

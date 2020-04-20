@@ -9,7 +9,7 @@ class Player {
         this.speed = 5, 
         this.reloadMax = 5, 
         this.reloadCurrent = 3,
-        this.gunType = 'bomb',
+        this.gunType = 'bullet',
         players.push(this)
     }
     center(){
@@ -119,5 +119,20 @@ class Player {
             new Bomb(this.pos.x,this.pos.y,xVector,yVector)
             // console.log(thisBombs)
         }
+    }
+
+    collide(obj){
+        if (obj.shape === 'circle'){
+            if (collideCircleCircle(this.pos.x,this.pos.y,this.size,obj.pos.x,obj.pos.y,obj.size)){
+                return true 
+            }
+        }else if(obj.shape === 'rect'){
+            if (collideRectCircle(obj.pos.x,obj.pos.y,obj.size,obj.size,this.pos.x,this.pos.y,this.size)){
+                return true 
+            }
+        }
+    }
+    damage(value){
+        this.health -= value; 
     }
 }

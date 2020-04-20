@@ -5,7 +5,7 @@ class Bullet{
         this.yVel=yVel;
         this.flash = 0; 
         this.size = 40;
-        this.speed=10;
+        this.speed=20;
         playerBullets.push(this);
         setShake(1,3)
     }

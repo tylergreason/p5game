@@ -7,7 +7,8 @@ class TestEnemy {
         this.timer = 0,
         this.angle=270,
         this.rotate=0,
-        this.fireRate = 60,
+        this.fireRate = 10,
+        this.shape = 'circle'
         testEnemies.push(this)
     }
     // method for getting center of enemy 

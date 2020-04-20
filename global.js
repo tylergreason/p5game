@@ -1,6 +1,6 @@
 const canvasWidth = 800; 
 const canvasHeight = 800; 
-const backgroundColor = () => { background(200,200,20) }
+const backgroundColor = () => { background(200,200,200) }
 let player=''; 
 const keyCodes = {
     l:76, 

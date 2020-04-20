@@ -9,6 +9,8 @@ class EnemyBullet{
         this.yDestination=yDestination+random(this.aimVariance*-1,this.aimVariance),
         this.speed=10,
         this.size=10,
+        this.damage=5,
+        this.shape = 'rect',
         enemyBullets.push(this)
     }
     center(){
@@ -46,11 +48,18 @@ class EnemyBullet{
         ){
             enemyBullets = enemyBullets.filter(obj => obj !== this)
         }
-        if (collideCircleCircle(this.pos.x,this.pos.y,this.size,player.pos.x,player.pos.y,players[0].size)){
-            enemyBullets = enemyBullets.filter(obj => obj !== this)
-            makeExplosions(this.pos.x,this.pos.y,5,30)
-            players[0].health -= 5;
-        }
+        players.forEach(player => {
+            if (player.collide(this)){
+                enemyBullets = enemyBullets.filter(obj => obj !== this)
+                makeExplosions(this.pos.x,this.pos.y,5,30)
+                player.damage(this.damage)
+            }
+        })
+        // if (collideCircleCircle(this.pos.x,this.pos.y,this.size,player.pos.x,player.pos.y,player.size)){
+        //     enemyBullets = enemyBullets.filter(obj => obj !== this)
+        //     makeExplosions(this.pos.x,this.pos.y,5,30)
+        //     players[0].health -= 5;
+        // }
     }
     
 
