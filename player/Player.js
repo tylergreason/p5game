@@ -43,10 +43,10 @@ class Player {
         if (this.pos.x-this.size/2 <= 0){
             this.pos.x = 0+this.size/2
         }
-        if (this.pos.y <= 0){
+        if (this.pos.y-this.size/2 <= 0){
             this.pos.y = 0+this.size/2;
         }
-        if (this.pos.y+this.size >= canvasHeight){
+        if (this.pos.y+this.size/2 >= canvasHeight){
             this.pos.y = canvasHeight-this.size/2
         }
     }
@@ -110,10 +110,8 @@ class Player {
     }
     shoot = (angle) => {
         // given an angle, find the x and y vector the bullet should follow
-        const xVector = cos(angle) 
-        const yVector = sin(angle)
         if (this.gunType === 'bullet'){
-            new Bullet(center(this).x,center(this).y,xVector,yVector)
+            new Bullet(center(this).x,center(this).y,angle)
         }
         if (this.gunType === 'bomb'){
             new Bomb(this.pos.x,this.pos.y,xVector,yVector)

@@ -72,3 +72,4 @@ function setShake(shake, time){
     screenshakeValues.shake = shake; 
     screenshakeValues.time = time;    
 }
+
