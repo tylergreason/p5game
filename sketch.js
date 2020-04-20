@@ -46,7 +46,9 @@ function draw() {
   // update enemy bullets 
   for (let i = 0; i < enemyBullets.length; i++){
     enemyBullets[i].update()
-    enemyBullets[i].show()
+    if (enemyBullets[i]){
+      enemyBullets[i].show()
+    }
   }
   fill(filler)
 
