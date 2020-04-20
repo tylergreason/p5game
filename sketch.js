@@ -10,8 +10,7 @@ function setup() {
 
 function draw() {
   push()
-    // sometime later, put an object in global called screenshake that has timer, amount attributes. Set the random values below to -amount,amount if the timer isn't at 0 or less, and 0 if it is. Then, when something needs to shake the screen, it can just set the screenshake objects value and timer. 
-    translate(random(0,0),random(0,0))
+    screenshake()
     backgroundColor()
     noStroke();
     // remove stroke from everything before drawing 

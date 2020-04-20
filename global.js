@@ -48,3 +48,27 @@ const center = obj => {
 const showFrameRate = () => {
     text(Math.floor(frameRate()),20,60)
 }
+
+// make screenshake object that can be modified for different shake strengths and times 
+let screenshakeValues = {
+    shake:0, 
+    time:0
+}
+
+// function to control how long the screen shakes for 
+function screenshake(){
+    if (screenshakeValues.time > 0){
+        screenshakeValues.time -=1; 
+    }   
+    if (screenshakeValues.time <= 0){
+        screenshakeValues.shake = 0; 
+    }
+    translate(random(screenshakeValues.shake*-1,screenshakeValues.shake),random(screenshakeValues.shake*-1,screenshakeValues.shake))
+
+}
+
+// function to set screenshake shake and time 
+function setShake(shake, time){
+    screenshakeValues.shake = shake; 
+    screenshakeValues.time = time;    
+}

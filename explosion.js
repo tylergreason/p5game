@@ -5,6 +5,8 @@ class Explosion {
         this.size=size+random(0,size*0.5);
         this.timer=50;
         explosions.push(this); 
+        setShake(10,3)
+
     }
     update(){
         this.timer -=1;

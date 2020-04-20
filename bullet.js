@@ -7,6 +7,7 @@ class Bullet{
         this.size = 40;
         this.speed=10;
         playerBullets.push(this);
+        setShake(1,3)
     }
     update(){
         this.bounds();
