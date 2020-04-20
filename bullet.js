@@ -7,13 +7,14 @@ class Bullet{
         this.size = 20;
         this.speed=20;
         this.angle=angle;
+        this.damage = 5;
         playerBullets.push(this);
         setShake(1,3)
     }
     update(){
         this.bounds();
         // check collision with enemy objects 
-        testEnemies.forEach(enemy => this.collide(enemy))
+        enemies.forEach(enemy => this.collide(enemy))
         //make bullet flash colors 
         this.flash +=1; 
         if (this.flash % 2 === 0){
@@ -63,8 +64,9 @@ class Bullet{
         }
     }
     // fire collision() when bullet has collided with an enemy 
-    collision(){
+    collision(obj){
         makeExplosions(this.pos.x,this.pos.y,5,50)
+        obj.health -= this.damage
         playerBullets = playerBullets.filter(bullet => bullet !== this)
     }
     // function to check if this bullet has collided with something, usually an enemy 
@@ -72,7 +74,7 @@ class Bullet{
         if (obj.shape === 'circle'){
             if (collideCircleCircle(this.pos.x,this.pos.y,this.size,obj.pos.x,obj.pos.y,obj.size)){
                 console.log('collided')
-                this.collision()
+                this.collision(obj)
                 return true 
             }
         }else if(obj.shape === 'rect'){

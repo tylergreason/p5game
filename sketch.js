@@ -5,8 +5,12 @@ function setup() {
   new Player(canvasWidth/2,canvasHeight/2)
   player = players[0]
   // make new test enemy to test with 
-  // new TestEnemy(100,100,20); 
-  // new TestEnemy(100,100,20); 
+  new TestEnemy(random(0,canvasWidth),random(0,canvasHeight),20); 
+  new TestEnemy(random(0,canvasWidth),random(0,canvasHeight),20); 
+  new TestEnemy(random(0,canvasWidth),random(0,canvasHeight),20); 
+  new TestEnemy(random(0,canvasWidth),random(0,canvasHeight),20); 
+  new TestEnemy(random(0,canvasWidth),random(0,canvasHeight),20); 
+
 }
 
 function draw() {
@@ -44,10 +48,7 @@ function draw() {
       }
     }
     // update enemies 
-    for (let i = 0; i < testEnemies.length;i++){
-      testEnemies[i].update(); 
-      // testEnemies[i].show();
-    }
+    enemies.forEach(enemy => enemy.update())
     // update enemy bullets 
     for (let i = 0; i < enemyBullets.length; i++){
       enemyBullets[i].update()

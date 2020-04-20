@@ -1,4 +1,4 @@
-const testEnemies = []; 
+let enemies = []; 
 class TestEnemy { 
     constructor(x,y){
         this.pos = createVector(x,y),
@@ -8,14 +8,16 @@ class TestEnemy {
         this.angle=270,
         this.rotate=0,
         this.fireRate = 10,
-        this.shape = 'circle'
-        testEnemies.push(this)
+        this.shape = 'circle',
+        this.health = 10,
+        enemies.push(this)
     }
     // method for getting center of enemy 
     center(){
         return createVector(this.pos.x+(this.size/2),this.pos.y+(this.size/2))
     }
     update(){
+        this.checkHealth()
         this.bounds()
         this.rotateBody()
         // move 
@@ -107,6 +109,13 @@ class TestEnemy {
         if (this.timer % this.fireRate === 0){
             // fire bullet 
             let bullet = new EnemyBullet(center(this).x,center(this).y,player.pos.x,player.pos.y)
+        }
+    }
+    checkHealth(){
+        if (this.health <= 0){
+            makeExplosions(this.pos.x,this.pos.y,15,100) 
+            setShake(10,10)
+            enemies = enemies.filter(enemy => enemy !== this)
         }
     }
 }
