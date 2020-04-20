@@ -7,6 +7,8 @@ function setup() {
 }
 
 function draw() {
+  push()
+  translate(random(0,0),random(0,0))
   backgroundColor()
   noStroke();
   drawPlayerHealth()
@@ -60,6 +62,7 @@ function draw() {
   // }else{
   //   filler=255
   // }
+  pop()
 }
 
 // testing angles with mousePressed 
