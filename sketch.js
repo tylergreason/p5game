@@ -19,48 +19,46 @@ function draw() {
     // update players 
     for (let i = 0; i < players.length;i++){
       players[i].update() 
-      if (players[i]){
-        players[i].show()
-      }
     }
     // update playerBullets 
     for (let i = 0; i <= playerBullets.length-1;i++){
       if (playerBullets[i]){
         playerBullets[i].update(); 
-        if (playerBullets[i]){
-          playerBullets[i].show();
-        }
+        // if (playerBullets[i]){
+        //   playerBullets[i].show();
+        // }
       }
     }
     // update player bombs 
     for (let i = 0; i <= playerBombs.length-1; i++){
       if (playerBombs[i]){
         playerBombs[i].update() 
-        if(playerBombs[i]){
-          playerBombs[i].show() 
-        }
+        // if(playerBombs[i]){
+        //   playerBombs[i].show() 
+        // }
       }
     }
     // update explosions
     for (let i = 0; i <= explosions.length-1; i++){
     if (explosions[i]){
-        explosions[i].show() 
-        explosions[i].update() 
+      explosions[i].update() 
+        // explosions[i].show() 
       }
     }
     // update enemies 
     for (let i = 0; i < testEnemies.length;i++){
       testEnemies[i].update(); 
-      testEnemies[i].show();
+      // testEnemies[i].show();
     }
     // update enemy bullets 
     for (let i = 0; i < enemyBullets.length; i++){
       enemyBullets[i].update()
-      if (enemyBullets[i]){
-        enemyBullets[i].show()
-      }
+      // if (enemyBullets[i]){
+      //   enemyBullets[i].show()
+      // }
     }
   pop()
+  showFrameRate()
 }
 
 // testing angles with mousePressed 

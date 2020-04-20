@@ -18,6 +18,7 @@ class Bomb {
         this.bounds()
         this.timer -=1;
         this.checkExplode()
+        this.show()
     }
     show(){
         this.x += this.xVel * this.speed; 

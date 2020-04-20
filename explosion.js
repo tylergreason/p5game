@@ -9,6 +9,7 @@ class Explosion {
     update(){
         this.timer -=1;
         this.checkTimer()
+        this.show()
     }
     show(){
         noStroke();

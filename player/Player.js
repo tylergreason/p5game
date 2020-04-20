@@ -9,7 +9,7 @@ class Player {
         this.speed = 5, 
         this.reloadMax = 5, 
         this.reloadCurrent = 3,
-        this.gunType = 'bullet',
+        this.gunType = 'bomb',
         players.push(this)
     }
     center(){
@@ -26,6 +26,7 @@ class Player {
         if (this.reloadCurrent >= this.reloadMax){
             this.reloadCurrent=this.reloadMax
         }
+        this.show()
     }
 
     show(){

@@ -7,6 +7,7 @@ class TestEnemy {
         this.timer = 0,
         this.angle=270,
         this.rotate=0,
+        this.fireRate = 60,
         testEnemies.push(this)
     }
     // method for getting center of enemy 
@@ -28,6 +29,7 @@ class TestEnemy {
             // let angle = atan2(this.pos.y-player.y,this.pos.x-player.x)
             // console.log(angle)
         }
+        this.show()
     }
     changeMovement(){
         this.angle = random(0,360)   
@@ -101,7 +103,7 @@ class TestEnemy {
         this.rotate+=3;
     }
     fire(){
-        if (this.timer % 30 === 0){
+        if (this.timer % this.fireRate === 0){
             // fire bullet 
             let bullet = new EnemyBullet(center(this).x,center(this).y,player.pos.x,player.pos.y)
         }

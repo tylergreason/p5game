@@ -44,3 +44,7 @@ const center = obj => {
         y:obj.pos.y+(obj.size/2)
     }
 }
+
+const showFrameRate = () => {
+    text(Math.floor(frameRate()),20,60)
+}

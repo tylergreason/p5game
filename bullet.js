@@ -19,6 +19,7 @@ class Bullet{
         if (this.flash % 2 === 1){
             fill(200,0,200,255) 
         }
+        this.show()
     }
     show(){
         this.pos.x+=this.xVel*this.speed;

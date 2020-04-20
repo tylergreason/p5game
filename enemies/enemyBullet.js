@@ -24,6 +24,7 @@ class EnemyBullet{
         this.bounds()
         this.pos.x+=cos(this.angle())*this.speed; 
         this.pos.y+=sin(this.angle())*this.speed;
+        this.show()
     }
     show(){
         fill(200,0,0)
