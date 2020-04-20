@@ -23,15 +23,19 @@ function draw() {
     // update playerBullets 
     for (let i = 0; i <= playerBullets.length-1;i++){
       if (playerBullets[i]){
-        playerBullets[i].show();
         playerBullets[i].update(); 
+        if (playerBullets[i]){
+          playerBullets[i].show();
+        }
       }
     }
     // update player bombs 
     for (let i = 0; i <= playerBombs.length-1; i++){
       if (playerBombs[i]){
-        playerBombs[i].show() 
         playerBombs[i].update() 
+        if(playerBombs[i]){
+          playerBombs[i].show() 
+        }
       }
     }
     // update explosions

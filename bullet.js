@@ -2,6 +2,7 @@ class Bullet{
     constructor(x,y,xVel,yVel){
         this.x = x; 
         this.y = y;
+        this.pos = createVector(x,y)
         this.xVel=xVel;
         this.yVel=yVel;
         this.flash = 0; 
@@ -10,33 +11,35 @@ class Bullet{
         playerBullets.push(this);
     }
     update(){
+        this.bounds();
         //make bullet flash colors 
         this.flash +=1; 
-        if (this.flash > 0){
-            fill(255,0,0,255)
-            // this.flash=0;
+        if (this.flash % 2 === 0){
+            fill(255,255,255,100)
+            // fill(255,0,0,255)
         }
-        if (this.flash > 1){
-            fill(0,0,255,255) 
-            this.flash=0;
+        if (this.flash % 2 === 1){
+            fill(200,0,200,255) 
         }
-        this.bounds();
-        if(collideRectCircle(200,200,100,150,this.x,this.y,this.size,this.size)){
-            playerBullets = playerBullets.filter(bullet => bullet !== this)
-        }
-
     }
     show(){
-        this.x+=this.xVel*this.speed;
-        this.y+=this.yVel*this.speed;
+        this.pos.x+=this.xVel*this.speed;
+        this.pos.y+=this.yVel*this.speed;
         // debugger
         noStroke();
-        // fill(255,0,0)    
-        ellipse(this.x,this.y,this.size,this.size)
+        ellipse(this.pos.x,this.pos.y,this.size,this.size)
     }
 
     bounds(){
-        if(this.x > canvasWidth || this.x < 0 || this.y > canvasHeight || this.y < 0){
+        if(
+            this.pos.x > canvasWidth 
+            || 
+            this.pos.x < 0 
+            || 
+            this.pos.y > canvasHeight 
+            || 
+            this.pos.y < 0
+        ){
             playerBullets = removeFromArray(this,playerBullets)
         }
     }

@@ -45,6 +45,11 @@ class EnemyBullet{
         ){
             enemyBullets = enemyBullets.filter(obj => obj !== this)
         }
+        if (collideCircleCircle(this.pos.x,this.pos.y,this.size,player.pos.x,player.pos.y,player.size)){
+            enemyBullets = enemyBullets.filter(obj => obj !== this)
+            makeExplosions(this.pos.x,this.pos.y,5,30)
+            player.health -= 5;
+        }
     }
     
 

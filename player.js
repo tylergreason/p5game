@@ -1,7 +1,7 @@
 let player = {
     x:canvasWidth/2,
     y:canvasHeight/2,
-    get v(){
+    get pos(){
         return createVector(this.x,this.y)
     },
     size:20,
@@ -16,10 +16,10 @@ let player = {
     reloadMax:5,
     reloadCurrent:3,
     get rightBorder(){
-        return this.x+this.size;
+        return this.x+this.size/2;
     },
     get leftBorder(){
-        return this.x
+        return this.x-this.size/2
     },
     get topBorder(){
         return this.y
@@ -33,7 +33,10 @@ let player = {
 
 
 const drawPlayer = () =>{
-    ellipse(player.v.x,player.v.y,player.size,player.size); 
+    fill(0)
+    ellipse(player.pos.x,player.pos.y,player.size,player.size); 
+    fill(255)
+    rect(player.pos.x,player.pos.y,1,1)
     player.reloadCurrent +=1; 
     if (player.reloadCurrent > player.reloadMax){
         player.reloadCurrent=player.reloadMax
@@ -42,16 +45,16 @@ const drawPlayer = () =>{
 
 const playerBounds = () => {
     if (player.rightBorder >= canvasWidth){
-        player.x = canvasWidth-player.size
+        player.x = canvasWidth-player.size/2
     }
     if (player.leftBorder <= 0){
-        player.x = 0
+        player.x = 0+player.size/2
     }
     if (player.topBorder <= 0){
-        player.y = 0; 
+        player.y = 0+player.size/2;
     }
     if (player.bottomBorder >= canvasHeight){
-        player.y = canvasHeight-player.size
+        player.y = canvasHeight-player.size/2
     }
 
 }
