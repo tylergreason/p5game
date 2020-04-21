@@ -1,7 +1,7 @@
-class HorizontalEnemy extends TestEnemy{
-    constructor(x,y,test){
+class HorizontalEnemy extends Enemy{
+    constructor(x,y){
         super(x,y)
-        this.test = test;
+        // this.test = test;
         this.horizontalMove = false;
         this.angle = 0;
         this.speed = 5;
@@ -11,7 +11,34 @@ class HorizontalEnemy extends TestEnemy{
         this.health = 100;
         this.fireRate = 50; 
         this.timer = random(0,20);
+        enemies.push(this);
     }
+    update(){
+        this.checkHealth()
+        this.bounds()
+        this.increaseTimer()
+        this.fire()
+        this.move()
+        this.show()
+    }
+    die(){
+        makeExplosions(center(this).x,center(this).y,15,this.sizeX*5) 
+        setShake(10,10)
+        enemies = enemies.filter(enemy => enemy !== this)
+    }
+    increaseTimer(){
+        this.timer+=1;
+        if (this.timer >= 100){
+            this.timer = 0; 
+            this.changeMovement()
+        }
+    }
+
+    move(){
+        this.pos.x += cos(this.angle)*this.speed
+        this.pos.y += sin(this.angle)*this.speed
+    }
+
     changeMovement(){
         this.angle += 180;
         console.log(this.angle)

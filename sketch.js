@@ -5,11 +5,11 @@ function setup() {
   new Player(canvasWidth/2,canvasHeight/2)
   player = players[0]
   // make new test enemy to test with 
-    new TestEnemy(random(0,canvasWidth),random(0,canvasHeight),20); 
-    new TestEnemy(random(0,canvasWidth),random(0,canvasHeight),20); 
-    new TestEnemy(random(0,canvasWidth),random(0,canvasHeight),20); 
-    new TestEnemy(random(0,canvasWidth),random(0,canvasHeight),20); 
-    new TestEnemy(random(0,canvasWidth),random(0,canvasHeight),20); 
+    new SpinEnemy(random(0,canvasWidth),random(0,canvasHeight),20); 
+    new SpinEnemy(random(0,canvasWidth),random(0,canvasHeight),20); 
+    new SpinEnemy(random(0,canvasWidth),random(0,canvasHeight),20); 
+    new SpinEnemy(random(0,canvasWidth),random(0,canvasHeight),20); 
+    new SpinEnemy(random(0,canvasWidth),random(0,canvasHeight),20); 
     new HorizontalEnemy(random(0,canvasWidth),random(0,canvasHeight),'test'); 
     new HorizontalEnemy(random(0,canvasWidth),random(0,canvasHeight),'test'); 
     new HorizontalEnemy(random(0,canvasWidth),random(0,canvasHeight),'test'); 

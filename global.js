@@ -39,9 +39,18 @@ function makeExplosions(x,y,qty,size){
 }
 
 const center = obj => {
-    return {
-        x:obj.pos.x+(obj.size/2),
-        y:obj.pos.y+(obj.size/2)
+    if (obj.size){
+        return {
+            x:obj.pos.x+(obj.size/2),
+            y:obj.pos.y+(obj.size/2)
+        }
+    }else if (obj.sizeX){
+        return {
+            x:obj.pos.x+(obj.sizeX/2),
+            y:obj.pos.y+(obj.sizeY/2)
+        }
+    }else{
+        debugger
     }
 }
 

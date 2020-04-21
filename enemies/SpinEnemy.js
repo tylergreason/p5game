@@ -1,5 +1,5 @@
-let enemies = []; 
-class TestEnemy { 
+
+class SpinEnemy { 
     constructor(x,y){
         this.pos = createVector(x,y),
         this.speed = 5,
@@ -114,7 +114,7 @@ class TestEnemy {
     }
     checkHealth(){
         if (this.health <= 0){
-            makeExplosions(this.center().x,this.center().y,15,this.size*10) 
+            makeExplosions(center(this).x,center(this).y,15,this.size*10) 
             setShake(10,10)
             enemies = enemies.filter(enemy => enemy !== this)
         }
