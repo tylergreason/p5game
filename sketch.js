@@ -5,12 +5,16 @@ function setup() {
   new Player(canvasWidth/2,canvasHeight/2)
   player = players[0]
   // make new test enemy to test with 
-  new TestEnemy(random(0,canvasWidth),random(0,canvasHeight),20); 
-  new TestEnemy(random(0,canvasWidth),random(0,canvasHeight),20); 
-  new TestEnemy(random(0,canvasWidth),random(0,canvasHeight),20); 
-  new TestEnemy(random(0,canvasWidth),random(0,canvasHeight),20); 
-  new TestEnemy(random(0,canvasWidth),random(0,canvasHeight),20); 
-
+    new TestEnemy(random(0,canvasWidth),random(0,canvasHeight),20); 
+    new TestEnemy(random(0,canvasWidth),random(0,canvasHeight),20); 
+    new TestEnemy(random(0,canvasWidth),random(0,canvasHeight),20); 
+    new TestEnemy(random(0,canvasWidth),random(0,canvasHeight),20); 
+    new TestEnemy(random(0,canvasWidth),random(0,canvasHeight),20); 
+    new HorizontalEnemy(random(0,canvasWidth),random(0,canvasHeight),'test'); 
+    new HorizontalEnemy(random(0,canvasWidth),random(0,canvasHeight),'test'); 
+    new HorizontalEnemy(random(0,canvasWidth),random(0,canvasHeight),'test'); 
+    new HorizontalEnemy(random(0,canvasWidth),random(0,canvasHeight),'test'); 
+    new HorizontalEnemy(random(0,canvasWidth),random(0,canvasHeight),'test'); 
 }
 
 function draw() {
@@ -62,11 +66,11 @@ function draw() {
 
 // testing angles with mousePressed 
 function mousePressed(){
-  console.log(` mouse x ${mouseX}`)
-  console.log(` mouse y ${mouseY}`)
-  let angle = atan2(mouseY - player.y, mouseX - player.x)
-  console.log(`angle: ${angle}`)
-  shoot(angle)
+  // console.log(` mouse x ${mouseX}`)
+  // console.log(` mouse y ${mouseY}`)
+  // let angle = atan2(mouseY - player.y, mouseX - player.x)
+  // console.log(`angle: ${angle}`)
+  // shoot(angle)
   // push() 
   //   translate(player.v.x,player.v.y)
   //   console.log(` mouse x ${mouseX}`)

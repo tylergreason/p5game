@@ -45,6 +45,13 @@ const center = obj => {
     }
 }
 
+const rectCenter = obj => {
+    return {
+        x:obj.pos.x+obj.sizeX/2,
+        y:obj.pos.y+obj.sizeY/2
+    }
+}
+
 const showFrameRate = () => {
     text(Math.floor(frameRate()),20,60)
 }
@@ -64,7 +71,6 @@ function screenshake(){
         screenshakeValues.shake = 0; 
     }
     translate(random(screenshakeValues.shake*-1,screenshakeValues.shake),random(screenshakeValues.shake*-1,screenshakeValues.shake))
-
 }
 
 // function to set screenshake shake and time 

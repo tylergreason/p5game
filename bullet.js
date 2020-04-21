@@ -78,8 +78,10 @@ class Bullet{
                 return true 
             }
         }else if(obj.shape === 'rect'){
-            if (collideRectCircle(obj.pos.x,obj.pos.y,obj.size,obj.size,this.pos.x,this.pos.y,this.size)){
+            if (collideRectCircle(obj.pos.x,obj.pos.y,obj.sizeX,obj.sizeY,this.pos.x,this.pos.y,this.size)){
+                this.collision(obj)
                 return true 
+
             }
         }
     }

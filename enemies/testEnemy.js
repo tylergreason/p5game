@@ -25,6 +25,13 @@ class TestEnemy {
         this.move()
         this.fire()
         // turn around periodically 
+        this.movementTimer()
+        this.show()
+    }
+    changeMovement(){
+        this.angle = random(0,360)   
+    }
+    movementTimer(){
         if (this.timer >=100){
             this.timer=0;
             this.changeMovement()
@@ -32,12 +39,6 @@ class TestEnemy {
             // let angle = atan2(this.pos.y-player.y,this.pos.x-player.x)
             // console.log(angle)
         }
-        this.show()
-    }
-    changeMovement(){
-        this.angle = random(0,360)   
-        console.log(this.angle) 
-        // this.angle = -90
     }
     
     // make function for moving enemy 
@@ -49,7 +50,7 @@ class TestEnemy {
     show(){
         fill(255,0,0)
         push()
-            translate(this.center().x,this.center().y)
+            translate(center(this).x,center(this).y)
             fill(0)
             rotate(this.rotate) 
             ellipseMode(CENTER)
@@ -113,7 +114,7 @@ class TestEnemy {
     }
     checkHealth(){
         if (this.health <= 0){
-            makeExplosions(this.pos.x,this.pos.y,15,100) 
+            makeExplosions(this.center().x,this.center().y,15,this.size*10) 
             setShake(10,10)
             enemies = enemies.filter(enemy => enemy !== this)
         }
