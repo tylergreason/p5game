@@ -61,7 +61,7 @@ function draw() {
       // }
     }
   pop()
-  showFrameRate()
+  drawInfo()
 }
 
 // testing angles with mousePressed 

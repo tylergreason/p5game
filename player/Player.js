@@ -21,7 +21,8 @@ class Player {
     update(){
         this.controls()
         this.bounds()
-        this.drawStats()
+        // moved to display.js
+        // this.drawStats()
         this.reloadCurrent +=1; 
         if (this.reloadCurrent >= this.reloadMax){
             this.reloadCurrent=this.reloadMax

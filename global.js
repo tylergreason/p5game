@@ -61,9 +61,7 @@ const rectCenter = obj => {
     }
 }
 
-const showFrameRate = () => {
-    text(Math.floor(frameRate()),20,60)
-}
+
 
 // make screenshake object that can be modified for different shake strengths and times 
 let screenshakeValues = {
