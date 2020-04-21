@@ -81,3 +81,13 @@ function mousePressed(){
   // pop()  
 }
 
+function keyReleased(){
+  // temporary player weapon switching 
+  if (keyCode === keys.u.keyCode){
+
+  }
+  if (keyCode === keys.o.keyCode){
+    console.log('o')
+  }
+  // return keyCode
+}

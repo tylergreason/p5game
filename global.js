@@ -22,6 +22,8 @@ const keys = {
     d:{keyCode:68, x:1,y:0},
     s:{keyCode:83, x:0,y:1},
     a:{keyCode:65, x:-1,y:0},
+    u:{keyCode:85},
+    o:{keyCode:79}
 }
 // object arrays 
 let playerBullets = [];
