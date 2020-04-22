@@ -80,20 +80,6 @@ class Player {
     }
     
     movementControls(){
-        // fix diagonal movement later to be like shooting directions 
-        // if(keyIsDown(RIGHT_ARROW) || keyIsDown(keyCodes.d)){
-
-        //     this.pos.x += this.speed; 
-        // }
-        // if(keyIsDown(LEFT_ARROW) || keyIsDown(keyCodes.a)){
-        //     this.pos.x -= this.speed; 
-        // }
-        // if(keyIsDown(UP_ARROW) || keyIsDown(keyCodes.w)){
-        //     this.pos.y -= this.speed; 
-        // }
-        // if(keyIsDown(DOWN_ARROW) || keyIsDown(keyCodes.s)){
-        //     this.pos.y += this.speed; 
-        // }
         if (keyIsDown(keys.a.keyCode) && keyIsDown(keys.s.keyCode)){
             this.moveAngle = 135
             this.move()
@@ -129,6 +115,7 @@ class Player {
     }
 
     shootingControls(){
+        // press space to shoot and reset reloadCurrent
         if (keyIsDown(keys.space.keyCode)){
             if (this.reloadCurrent === this.reloadMax){
                 this.shoot()
@@ -169,7 +156,6 @@ class Player {
         }
         if (this.gunType === 'bomb'){
             new Bomb(center(this).x+cos(this.aimAngle)*distance,center(this).y+sin(this.aimAngle)*distance,this.aimAngle)
-            // console.log(thisBombs)
         }
     }
 
@@ -179,6 +165,8 @@ class Player {
     }
 
     collide(obj){
+        // function for if an object has collided with the player
+        // this can easily be changed later if the player changes shape 
         if (obj.shape === 'circle'){
             if (collideCircleCircle(this.pos.x,this.pos.y,this.size,obj.pos.x,obj.pos.y,obj.size)){
                 return true 
@@ -189,7 +177,7 @@ class Player {
             }
         }
     }
-    damage(value){
+    damagePlayer(value){
         this.health -= value; 
     }
     switchWeapon(key){

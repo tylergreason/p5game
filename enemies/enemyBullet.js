@@ -52,7 +52,7 @@ class EnemyBullet{
             if (player.collide(this)){
                 enemyBullets = enemyBullets.filter(obj => obj !== this)
                 makeExplosions(this.pos.x,this.pos.y,5,30)
-                player.damage(this.damage)
+                player.damagePlayer(this.damage)
             }
         })
         // if (collideCircleCircle(this.pos.x,this.pos.y,this.size,player.pos.x,player.pos.y,player.size)){
