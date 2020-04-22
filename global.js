@@ -93,3 +93,7 @@ function setShake(shake, time){
 function setFill(obj){
     fill(`rgba(${obj.r},${obj.g},${obj.b},${obj.a})`)
 }
+
+function findAngle(yDestination,yOrigin,xDestination,xOrigin){
+    return atan2(yDestination-yOrigin,xDestination-xOrigin)
+}

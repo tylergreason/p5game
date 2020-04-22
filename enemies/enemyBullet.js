@@ -7,25 +7,17 @@ class EnemyBullet{
         this.aimVariance = 20,
         this.xDestination=xDestination+random(this.aimVariance*-1,this.aimVariance),
         this.yDestination=yDestination+random(this.aimVariance*-1,this.aimVariance),
+        this.angle = findAngle(this.yDestination,this.yOrigin,this.xDestination,this.xOrigin)
         this.speed=10,
         this.size=10,
         this.damage=5,
         this.shape = 'circle',
         enemyBullets.push(this)
     }
-    center(){
-        return createVector(this.pos.x+(this.size/2),this.pos.y+(this.size/2))
-    }
-    // find and return angle to travel at 
-    angle(){
-        let angle = atan2(this.yDestination-this.yOrigin,this.xDestination-this.xOrigin)
-        // console.log(angle) 
-        return angle
-    }
     update(){
         this.bounds()
-        this.pos.x+=cos(this.angle())*this.speed; 
-        this.pos.y+=sin(this.angle())*this.speed;
+        this.pos.x+=cos(this.angle)*this.speed; 
+        this.pos.y+=sin(this.angle)*this.speed;
         this.show()
     }
     show(){
@@ -35,16 +27,16 @@ class EnemyBullet{
     bounds(){
         if(
             // collide right side bounds
-            (this.center().x+this.size/2) > canvasWidth
+            (center(this).x+this.size/2) > canvasWidth
             ||
             // collide left side bounds
-            this.center().x-this.size/2 < 0
+            center(this).x-this.size/2 < 0
             ||
             // collide bottom side bounds
-            this.center().y+this.size/2 > canvasHeight
+            center(this).y+this.size/2 > canvasHeight
             ||
             // collide top side bounds
-            this.center().y-this.size/2 < 0
+            center(this).y-this.size/2 < 0
         ){
             enemyBullets = enemyBullets.filter(obj => obj !== this)
         }
