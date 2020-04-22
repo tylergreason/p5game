@@ -13,7 +13,7 @@ function setup() {
     // new HorizontalEnemy(random(0,canvasWidth),random(0,canvasHeight),'test'); 
     // new HorizontalEnemy(random(0,canvasWidth),random(0,canvasHeight),'test'); 
     // new HorizontalEnemy(random(0,canvasWidth),random(0,canvasHeight),'test'); 
-    // new HorizontalEnemy(random(0,canvasWidth),random(0,canvasHeight),'test'); 
+    // new HorizontalEnemy(random(0,canvasWidth),random(0,canvasHeight),'test');    
     // new HorizontalEnemy(random(0,canvasWidth),random(0,canvasHeight),'test'); 
 }
 

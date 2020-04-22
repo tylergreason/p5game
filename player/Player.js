@@ -3,6 +3,8 @@ class Player {
     constructor(x,y){
         this.pos = createVector(x,y),
         this.size = 20,
+        this.sizeX=20,
+        this.sizeY=20,
         this.health = 100, 
         this.centerX = this.pos.x+this.size/2,
         this.centerY = this.pos.y+this.size/2,
@@ -11,6 +13,8 @@ class Player {
         this.reloadCurrent = 3,
         this.gunArray = ['bullet','bomb']
         this.gunArrayPosition = 0, 
+        this.aimAngle = -90,
+        this.moveAngle = 0, 
         this.gunType = this.gunArray[this.gunArrayPosition],
         players.push(this)
     }
@@ -34,9 +38,18 @@ class Player {
 
     show(){
         fill(0)
-        ellipse(this.pos.x,this.pos.y,this.size,this.size); 
+        ellipse(center(this).x,center(this).y,this.size,this.size); 
         fill(255)
-        rect(this.pos.x,this.pos.y,1,1)
+        rect(center(this).x,center(this).y,1,1)
+
+        // draw aiming indicator
+        push() 
+            translate(center(this).x,center(this).y);
+            rotate(this.aimAngle); 
+            fill(255,0,0); 
+            // triangle(this.sizeX-10, this.sizeY,this.sizeX-10, -this.sizeY, 30, 0)
+            ellipse(20,0,10,10)
+        pop()
     }   
     
     bounds(){
@@ -55,78 +68,105 @@ class Player {
     }
     
     drawStats(){
-        textSize(32) 
+        textSize(26) 
         fill(0)
-        text(`HP: ${this.health}`, 10,32)
+        text(`HP: ${this.health}`, 10,32)   
         text(`Weapon: ${this.gunType}`, 10,64)
     }
 
     controls = () => {
-    // fix diagonal movement later to be like shooting directions 
-    if(keyIsDown(RIGHT_ARROW) || keyIsDown(keyCodes.d)){
-        this.pos.x += this.speed; 
+        this.movementControls()
+        this.shootingControls()
     }
-    if(keyIsDown(LEFT_ARROW) || keyIsDown(keyCodes.a)){
-        this.pos.x -= this.speed; 
-    }
-    if(keyIsDown(UP_ARROW) || keyIsDown(keyCodes.w)){
-        this.pos.y -= this.speed; 
-    }
-    if(keyIsDown(DOWN_ARROW) || keyIsDown(keyCodes.s)){
-        this.pos.y += this.speed; 
-    }
-    // shooting 
-    // check to see if this is reloaded 
-    if (this.reloadCurrent === this.reloadMax){
-        // if (keyIsDown(keys.space.keyCode)){
-        if (keyIsDown(keys.j.keyCode) && keyIsDown(keys.k.keyCode)){
-            this.shoot(135)
-            this.reloadCurrent = 0; 
+    
+    movementControls(){
+        if (keyIsDown(keys.a.keyCode) && keyIsDown(keys.s.keyCode)){
+            this.moveAngle = 135
+            this.move()
         }
-        else if (keyIsDown(keys.j.keyCode) && keyIsDown(keys.i.keyCode)){
-            this.shoot(270-45)
-            this.reloadCurrent = 0; 
+        else if (keyIsDown(keys.a.keyCode) && keyIsDown(keys.w.keyCode)){
+            this.moveAngle = 225
+            this.move()
         }
-        else if (keyIsDown(keys.l.keyCode) && keyIsDown(keys.i.keyCode)){
-            this.shoot(270+45)
-            this.reloadCurrent = 0; 
+        else if (keyIsDown(keys.d.keyCode) && keyIsDown(keys.w.keyCode)){
+            this.moveAngle = 315
+            this.move()
         }
-        else if (keyIsDown(keys.l.keyCode) && keyIsDown(keys.k.keyCode)){
-            this.shoot(45)
-            this.reloadCurrent = 0; 
+        else if (keyIsDown(keys.d.keyCode) && keyIsDown(keys.s.keyCode)){
+            this.moveAngle = 45
+            this.move()
         }
-        else if (keyIsDown(keys.i.keyCode)){
-            this.shoot(-90);
-            this.reloadCurrent = 0; 
+        else if (keyIsDown(keys.w.keyCode)){
+            this.moveAngle = 270
+            this.move()
         }
-        else if (keyIsDown(keys.l.keyCode)){
-            this.shoot(0);
-            this.reloadCurrent = 0; 
+        else if (keyIsDown(keys.d.keyCode)){
+            this.moveAngle = 0
+            this.move()
         }
-        else if (keyIsDown(keys.k.keyCode)){
-            this.shoot(-270);
-            this.reloadCurrent = 0; 
+        else if (keyIsDown(keys.s.keyCode)){
+            this.moveAngle = 90
+            this.move()
         }
-        else if (keyIsDown(keys.j.keyCode)){
-            this.shoot(180);
-            this.reloadCurrent = 0; 
-        }
-        }
-    // }
-    }
-    shoot = (angle) => {
-        
-        // given an angle, find the x and y vector the bullet should follow
-        if (this.gunType === 'bullet'){
-            new Bullet(center(this).x,center(this).y,angle)
-        }
-        if (this.gunType === 'bomb'){
-            new Bomb(this.pos.x,this.pos.y,angle)
-            // console.log(thisBombs)
+        else if (keyIsDown(keys.a.keyCode)){
+            this.moveAngle = 180
+            this.move()
         }
     }
 
+    shootingControls(){
+        // press space to shoot and reset reloadCurrent
+        if (keyIsDown(keys.space.keyCode)){
+            if (this.reloadCurrent === this.reloadMax){
+                this.shoot()
+                this.reloadCurrent = 0; 
+            }
+        }
+        if (keyIsDown(keys.j.keyCode) && keyIsDown(keys.k.keyCode)){
+            this.aimAngle = 135
+        }
+        else if (keyIsDown(keys.j.keyCode) && keyIsDown(keys.i.keyCode)){
+            this.aimAngle = 225
+        }
+        else if (keyIsDown(keys.l.keyCode) && keyIsDown(keys.i.keyCode)){
+            this.aimAngle = 315
+        }
+        else if (keyIsDown(keys.l.keyCode) && keyIsDown(keys.k.keyCode)){
+            this.aimAngle = 45
+        }
+        else if (keyIsDown(keys.i.keyCode)){
+            this.aimAngle = 270
+        }
+        else if (keyIsDown(keys.l.keyCode)){
+            this.aimAngle = 0
+        }
+        else if (keyIsDown(keys.k.keyCode)){
+            this.aimAngle = 90
+        }
+        else if (keyIsDown(keys.j.keyCode)){
+            this.aimAngle = 180
+        }
+    }
+
+    shoot = () => {
+        // make a variable for the distance from the player's center that the weapon fires 
+        let distance = 25; 
+        if (this.gunType === 'bullet'){
+            new Bullet(center(this).x+cos(this.aimAngle)*distance,center(this).y+sin(this.aimAngle)*distance,this.aimAngle)
+        }
+        if (this.gunType === 'bomb'){
+            new Bomb(center(this).x+cos(this.aimAngle)*distance,center(this).y+sin(this.aimAngle)*distance,this.aimAngle)
+        }
+    }
+
+    move(){
+        this.pos.x+=cos(this.moveAngle)*this.speed
+        this.pos.y+=sin(this.moveAngle)*this.speed
+    }
+
     collide(obj){
+        // function for if an object has collided with the player
+        // this can easily be changed later if the player changes shape 
         if (obj.shape === 'circle'){
             if (collideCircleCircle(this.pos.x,this.pos.y,this.size,obj.pos.x,obj.pos.y,obj.size)){
                 return true 
@@ -137,7 +177,7 @@ class Player {
             }
         }
     }
-    damage(value){
+    damagePlayer(value){
         this.health -= value; 
     }
     switchWeapon(key){
