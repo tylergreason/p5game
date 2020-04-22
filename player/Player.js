@@ -3,6 +3,8 @@ class Player {
     constructor(x,y){
         this.pos = createVector(x,y),
         this.size = 20,
+        this.sizeX=20,
+        this.sizeY=20,
         this.health = 100, 
         this.centerX = this.pos.x+this.size/2,
         this.centerY = this.pos.y+this.size/2,
@@ -11,6 +13,7 @@ class Player {
         this.reloadCurrent = 3,
         this.gunArray = ['bullet','bomb']
         this.gunArrayPosition = 0, 
+        this.aimAngle = -90,
         this.gunType = this.gunArray[this.gunArrayPosition],
         players.push(this)
     }
@@ -34,9 +37,17 @@ class Player {
 
     show(){
         fill(0)
-        ellipse(this.pos.x,this.pos.y,this.size,this.size); 
+        ellipse(center(this).x,center(this).y,this.size,this.size); 
         fill(255)
-        rect(this.pos.x,this.pos.y,1,1)
+        rect(center(this).x,center(this).y,1,1)
+        // draw aiming triangle
+        push() 
+            translate(center(this).x,center(this).y);
+            rotate(this.aimAngle); 
+            fill(255,0,0); 
+            // triangle(this.sizeX-10, this.sizeY,this.sizeX-10, -this.sizeY, 30, 0)
+            ellipse(20,0,10,10)
+        pop()
     }   
     
     bounds(){
@@ -55,9 +66,9 @@ class Player {
     }
     
     drawStats(){
-        textSize(32) 
+        textSize(26) 
         fill(0)
-        text(`HP: ${this.health}`, 10,32)
+        text(`HP: ${this.health}`, 10,32)   
         text(`Weapon: ${this.gunType}`, 10,64)
     }
 
@@ -78,52 +89,61 @@ class Player {
     // shooting 
     // check to see if this is reloaded 
     if (this.reloadCurrent === this.reloadMax){
-        if (keyIsDown(keys.space.keyCode)){
         if (keyIsDown(keys.j.keyCode) && keyIsDown(keys.k.keyCode)){
-            this.shoot(135)
+            // this.shoot(135)
+            this.aimAngle = 135
             this.reloadCurrent = 0; 
         }
         else if (keyIsDown(keys.j.keyCode) && keyIsDown(keys.i.keyCode)){
-            this.shoot(270-45)
+            // this.shoot(270-45)
+            this.aimAngle = 225
             this.reloadCurrent = 0; 
         }
         else if (keyIsDown(keys.l.keyCode) && keyIsDown(keys.i.keyCode)){
-            this.shoot(270+45)
+            // this.shoot(270+45)
+            this.aimAngle = 315
             this.reloadCurrent = 0; 
         }
         else if (keyIsDown(keys.l.keyCode) && keyIsDown(keys.k.keyCode)){
-            this.shoot(45)
+            // this.shoot(45)
+            this.aimAngle = 45
             this.reloadCurrent = 0; 
         }
         else if (keyIsDown(keys.i.keyCode)){
-            this.shoot(-90);
+            // this.shoot(-90);
+            this.aimAngle = -90
             this.reloadCurrent = 0; 
         }
         else if (keyIsDown(keys.l.keyCode)){
-            this.shoot(0);
+            // this.shoot(0);
+            this.aimAngle = 0
             this.reloadCurrent = 0; 
         }
         else if (keyIsDown(keys.k.keyCode)){
-            this.shoot(-270);
+            // this.shoot(-270);
+            this.aimAngle = -270
             this.reloadCurrent = 0; 
         }
         else if (keyIsDown(keys.j.keyCode)){
-            this.shoot(180);
+            // this.shoot(180);
+            this.aimAngle = 180
             this.reloadCurrent = 0; 
         }
         }
-    }
-    }
-    shoot = (angle) => {
-        
-        // given an angle, find the x and y vector the bullet should follow
-        if (this.gunType === 'bullet'){
-            new Bullet(center(this).x,center(this).y,angle)
+        if (keyIsDown(keys.space.keyCode)){
+            this.shoot()
         }
-        if (this.gunType === 'bomb'){
-            new Bomb(this.pos.x,this.pos.y,angle)
-            // console.log(thisBombs)
-        }
+    }
+    shoot = () => {
+            
+            // given an angle, find the x and y vector the bullet should follow
+            if (this.gunType === 'bullet'){
+                new Bullet(center(this).x,center(this).y,this.aimAngle)
+            }
+            if (this.gunType === 'bomb'){
+                new Bomb(this.pos.x,this.pos.y,this.aimAngle)
+                // console.log(thisBombs)
+            }
     }
 
     collide(obj){
