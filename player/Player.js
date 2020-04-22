@@ -19,6 +19,7 @@ class Player {
         this.aimControlLag = 0, 
         players.push(this)
     }
+
     center(){
         return {
             x:this.pos.x+this.size/2,
@@ -209,3 +210,5 @@ class Player {
     }
 
 }
+
+Player.test = 'test'
