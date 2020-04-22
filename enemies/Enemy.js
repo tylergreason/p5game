@@ -3,6 +3,7 @@ class Enemy {
     constructor(x,y){
         this.pos = createVector(x,y),
         this.hitBoxes=[]
+        enemies.push(this)
     }
     // generic function to check health and run die function if below 0 
     checkHealth(){

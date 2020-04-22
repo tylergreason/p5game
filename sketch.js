@@ -8,16 +8,9 @@ function setup() {
   player = players[0]
   player.setWeapon(Bullet)
   // make new test enemy to test with 
-  // new SpinEnemy(random(0,canvasWidth),random(0,canvasHeight),20); 
-  // new SpinEnemy(random(0,canvasWidth),random(0,canvasHeight),20); 
-  // new SpinEnemy(random(0,canvasWidth),random(0,canvasHeight),20); 
-  // new SpinEnemy(random(0,canvasWidth),random(0,canvasHeight),20); 
-  // new SpinEnemy(random(0,canvasWidth),random(0,canvasHeight),20); 
+  // new SpinEnemy(random(0,canvasWidth),random(0,canvasHeight));    
   // new HorizontalEnemy(random(0,canvasWidth),random(0,canvasHeight),'test'); 
-  // new HorizontalEnemy(random(0,canvasWidth),random(0,canvasHeight),'test'); 
-  // new HorizontalEnemy(random(0,canvasWidth),random(0,canvasHeight),'test'); 
-  // new HorizontalEnemy(random(0,canvasWidth),random(0,canvasHeight),'test');    
-  // new HorizontalEnemy(random(0,canvasWidth),random(0,canvasHeight),'test'); 
+  new LobberEnemy(random(0,canvasWidth-40),canvasHeight*.9)
 }
 
 function draw() {
@@ -95,7 +88,9 @@ function keyReleased(){
   // return keyCode
 }
 
+// add function to testing buttons 
 window.onload = ()=>{
   document.getElementById('spawnSpinEnemy').onclick = () => spawnEnemy('spinEnemy')
+  document.getElementById('spawnLobberEnemy').onclick = () => spawnEnemy('lobberEnemy')
   document.getElementById('spawnHorizontalEnemy').onclick = () => spawnEnemy('horizontalEnemy')
 }

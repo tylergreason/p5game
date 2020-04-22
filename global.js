@@ -100,4 +100,7 @@ function spawnEnemy(enemy){
     if (enemy === 'spinEnemy'){
         return new SpinEnemy(random(0,canvasWidth),random(0,canvasHeight));  
     }
+    if (enemy === 'lobberEnemy'){
+        return new LobberEnemy(random(10,canvasWidth-50),random(canvasHeight - 100,canvasHeight-50));  
+    }
 }

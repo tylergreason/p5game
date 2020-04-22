@@ -6,6 +6,5 @@ class HorizontalEnemyBullet extends EnemyBullet{
         this.size = 20; 
         this.sizeX = this.size;
         this.sizeY = this.size;
-    }
-    
+    }   
 }

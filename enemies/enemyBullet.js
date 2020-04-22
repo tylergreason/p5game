@@ -5,6 +5,7 @@ class EnemyBullet{
         this.yOrigin=yOrigin,
         this.pos = createVector(this.xOrigin,this.yOrigin),
         this.aimVariance = 20,
+        this.timer = 0, 
         this.xDestination=xDestination+random(this.aimVariance*-1,this.aimVariance),
         this.yDestination=yDestination+random(this.aimVariance*-1,this.aimVariance),
         this.angle = findAngle(this.yDestination,this.yOrigin,this.xDestination,this.xOrigin)
@@ -17,6 +18,7 @@ class EnemyBullet{
         enemyBullets.push(this)
     }
     update(){
+        this.increaseTimer()
         this.bounds()
         this.move()
         this.collide()
@@ -32,7 +34,10 @@ class EnemyBullet{
         this.pos.x+=cos(this.angle)*this.speed; 
         this.pos.y+=sin(this.angle)*this.speed;
     }
-    
+
+    increaseTimer(){
+        this.timer +=1; 
+    }
     bounds(){
         if(
             // collide right side bounds
