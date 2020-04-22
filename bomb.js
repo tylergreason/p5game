@@ -45,4 +45,4 @@ class Bomb {
     }
 }
 
-Bomb.reload = 3; 
+Bomb.reload = 30; 

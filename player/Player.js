@@ -10,12 +10,14 @@ class Player {
         this.centerY = this.pos.y+this.size/2,
         this.speed = 5, 
         this.reloadCurrent = 3,
-        this.gunArray = [{name:'bullet'},{name:'bomb'}]
+        this.gunArray = [{name:'bullet'}]
         this.gunArrayPosition = 0, 
         this.aimAngle = -90,
         this.moveAngle = 0, 
         this.gunType = this.gunArray[this.gunArrayPosition],
-        this.aimControlLag = 0, 
+        this.aimControlLag = 0;
+        // set first weapon to Bullet upon creating player 
+        this.setWeapon(Bomb)
         players.push(this)
     }
 
@@ -24,7 +26,7 @@ class Player {
         this.gunArray[position].name = weapon.name;
         this.gunArray[position].reload = weapon.reload;
         // allow player to fire the weapon immediately 
-        this.gunArrayPosition[position].reloadTimer = weapon.reload;
+        this.gunArray[position].reloadTimer = weapon.reload;
     }
 
     center(){
@@ -38,7 +40,7 @@ class Player {
         this.bounds()
         // moved to display.js
         // this.drawStats()
-        this.reloadCurrent +=1; 
+        this.gunType.reloadTimer +=1 
         this.show()
     }
 
@@ -159,23 +161,47 @@ class Player {
         }
     }
 
-    shoot = () => {
+    // shoot = () => {
+    //     // make a variable for the distance from the player's center that the weapon fires 
+    //     let distance = 25; 
+    //     if (this.gunType.name === 'bullet'){
+    //         if (this.reloadCurrent >= Bullet.reload){
+    //             new Bullet(center(this).x+cos(this.aimAngle)*distance,center(this).y+sin(this.aimAngle)*distance,this.aimAngle)
+    //             this.reloadCurrent = 0; 
+    //         }
+    //     }
+    //     if (this.gunType.name === 'bomb'){
+    //         if (this.reloadCurrent >= Bomb.reload){
+    //             new Bomb(center(this).x+cos(this.aimAngle)*distance,center(this).y+sin(this.aimAngle)*distance,this.aimAngle)
+    //             this.reloadCurrent = 0; 
+    //         }
+    //     }
+    // }
+
+    shoot(){
         // make a variable for the distance from the player's center that the weapon fires 
         let distance = 25; 
-        if (this.gunType.name === 'bullet'){
-            if (this.reloadCurrent >= Bullet.reload){
+        if (this.gunReloaded()){
+            // check all weapon types and fire 
+            if (this.gunType.name === 'Bullet'){
                 new Bullet(center(this).x+cos(this.aimAngle)*distance,center(this).y+sin(this.aimAngle)*distance,this.aimAngle)
-                this.reloadCurrent = 0; 
+                this.gunType.reloadTimer = 0; 
             }
-        }
-        if (this.gunType.name === 'bomb'){
-            if (this.reloadCurrent >= Bomb.reload){
+            if (this.gunType.name === 'Bomb'){
                 new Bomb(center(this).x+cos(this.aimAngle)*distance,center(this).y+sin(this.aimAngle)*distance,this.aimAngle)
-                this.reloadCurrent = 0; 
-            }
+                this.gunType.reloadTimer = 0; 
+            }   
         }
     }
 
+    // check to see if the player is able to fire their weapon 
+    gunReloaded(){
+        if(this.gunType.reloadTimer >= this.gunType.reload){
+            console.log('true')
+            return true 
+        }
+        console.log('false')
+    }
     move(){
         this.pos.x+=cos(this.moveAngle)*this.speed
         this.pos.y+=sin(this.moveAngle)*this.speed
