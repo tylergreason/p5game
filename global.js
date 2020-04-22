@@ -23,7 +23,8 @@ const keys = {
     s:{keyCode:83, x:0,y:1},
     a:{keyCode:65, x:-1,y:0},
     u:{keyCode:85},
-    o:{keyCode:79}
+    o:{keyCode:79},
+    space:{keyCode:32}
 }
 // object arrays 
 let playerBullets = [];

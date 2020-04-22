@@ -78,6 +78,7 @@ class Player {
     // shooting 
     // check to see if this is reloaded 
     if (this.reloadCurrent === this.reloadMax){
+        if (keyIsDown(keys.space.keyCode)){
         if (keyIsDown(keys.j.keyCode) && keyIsDown(keys.k.keyCode)){
             this.shoot(135)
             this.reloadCurrent = 0; 
@@ -112,13 +113,15 @@ class Player {
         }
         }
     }
+    }
     shoot = (angle) => {
+        
         // given an angle, find the x and y vector the bullet should follow
         if (this.gunType === 'bullet'){
             new Bullet(center(this).x,center(this).y,angle)
         }
         if (this.gunType === 'bomb'){
-            new Bomb(this.pos.x,this.pos.y,xVector,yVector)
+            new Bomb(this.pos.x,this.pos.y,angle)
             // console.log(thisBombs)
         }
     }
