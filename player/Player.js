@@ -140,9 +140,10 @@ class Player {
 
     drawWeapon(x,y,weapon){
         noStroke()
+        let highlightColor = {r:212,g:217,b:69,a:1}
         let weaponBarWidth = 100; 
         if (weapon === this.gunType){
-            fill(212, 217, 69)
+            setFill(highlightColor)
             rect(x-5,y-5,weaponBarWidth+10,20+10)
         }
         // debugger
@@ -153,6 +154,11 @@ class Player {
         rect(x,y,reloadPercent,20)
         fill(255)
         textSize(20)
+        if (weapon === this.gunType){
+            setFill(highlightColor)
+        }else{
+            fill(255)
+        }
         text(weapon.name,x,y+18)
     }
 

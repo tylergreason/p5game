@@ -89,3 +89,7 @@ function setShake(shake, time){
     screenshakeValues.time = time;    
 }
 
+// function to set the fill color with an object 
+function setFill(obj){
+    fill(`rgba(${obj.r},${obj.g},${obj.b},${obj.a})`)
+}
