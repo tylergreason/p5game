@@ -10,7 +10,7 @@ function setup() {
   // make new test enemy to test with 
   // new SpinEnemy(random(0,canvasWidth),random(0,canvasHeight));    
   // new HorizontalEnemy(random(0,canvasWidth),random(0,canvasHeight),'test'); 
-  new LobberEnemy(random(0,canvasWidth-40),canvasHeight*.9)
+  // new LobberEnemy(random(0,canvasWidth-40),canvasHeight*.9)
 }
 
 function draw() {
