@@ -10,9 +10,8 @@ class Player {
         this.reloadMax = 5, 
         this.reloadCurrent = 3,
         this.gunArray = ['bullet','bomb']
-        this.gunType = this.gunArray[0],
-        this.switchGun = true, 
-        this.switchGunKeyCode = 0,
+        this.gunArrayPosition = 0, 
+        this.gunType = this.gunArray[this.gunArrayPosition],
         players.push(this)
     }
     center(){
@@ -63,7 +62,6 @@ class Player {
     }
 
     controls = () => {
-    this.switchWeapon()
     // fix diagonal movement later to be like shooting directions 
     if(keyIsDown(RIGHT_ARROW) || keyIsDown(keyCodes.d)){
         this.pos.x += this.speed; 
@@ -139,11 +137,23 @@ class Player {
     damage(value){
         this.health -= value; 
     }
-    switchWeapon(){
-        // if (keyReleased() === keys.u.keyCode){
-        //     console.log('u')
-        //     keyCode = ''
-        // }
+    switchWeapon(key){
+        if (key === 'o'){
+            this.gunArrayPosition += 1; 
+            console.log(this.gunType)
+            console.log(this.gunArrayPosition)
+            if (this.gunArrayPosition >= this.gunArray.length){
+                this.gunArrayPosition = 0; 
+            }
+        }
+        if (key === 'u'){
+            this.gunArrayPosition -= 1; 
+            console.log(this.gunType)
+            if (this.gunArrayPosition < 0){
+                this.gunArrayPosition = this.gunArray.length-1; 
+            }
+        }
+        this.gunType = this.gunArray[this.gunArrayPosition]
     }
 
 }

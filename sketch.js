@@ -84,10 +84,10 @@ function mousePressed(){
 function keyReleased(){
   // temporary player weapon switching 
   if (keyCode === keys.u.keyCode){
-
+    player.switchWeapon('u')
   }
   if (keyCode === keys.o.keyCode){
-    console.log('o')
+    player.switchWeapon('o')
   }
   // return keyCode
 }
