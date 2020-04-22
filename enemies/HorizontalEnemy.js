@@ -8,7 +8,7 @@ class HorizontalEnemy extends Enemy{
         this.sizeX = 80; 
         this.sizeY = 160; 
         this.shape = 'rect';
-        this.health = 100;
+        this.health = 50;
         this.fireRate = 50; 
         this.timer = random(0,20);
         this.hitBoxes.push({shape:'rect',x:0,y:0,sizeX:this.sizeX,sizeY:this.sizeY})
@@ -51,7 +51,7 @@ class HorizontalEnemy extends Enemy{
         rectMode(CENTER)
         fill((this.timer*5))
         ellipse(rectCenter(this).x,rectCenter(this).y,this.timer-20)
-        this.drawHitBoxes()
+        // this.drawHitBoxes()
     }
 
     drawHitBoxes(){
@@ -59,6 +59,9 @@ class HorizontalEnemy extends Enemy{
         this.hitBoxes.forEach(hitBox => {
             if (hitBox.shape === 'rect'){
                 return rect(this.pos.x+hitBox.x,this.pos.y+hitBox.y,hitBox.sizeX,hitBox.sizeY)
+            }
+            if(hitBox.shape === 'circle'){
+                return ellipse(this.pos.x+hitBox.x,this.pos.y+hitBox.y,hitBox.sizeX,hitBox.sizeY)
             }
         })
     }

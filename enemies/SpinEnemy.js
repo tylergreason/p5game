@@ -1,4 +1,3 @@
-
 class SpinEnemy extends Enemy { 
     constructor(x,y){
         super(x,y)
@@ -13,7 +12,8 @@ class SpinEnemy extends Enemy {
         this.fireRate = 10,
         this.shape = 'circle',
         this.health = 10,
-        this.hitBoxes.push({shape:'circle',x:0,y:0,sizeX:this.sizeX,sizeY:this.sizeY}),
+        // had to edit the x and y coords of the hitbox to account for drawing this enemy from the center, not the corner: 
+        this.hitBoxes.push({shape:'circle',x:0+this.sizeX/2,y:0+this.sizeY/2,sizeX:this.sizeX,sizeY:this.sizeY}),
         enemies.push(this)
     }
     // method for getting center of enemy 
@@ -74,11 +74,11 @@ class SpinEnemy extends Enemy {
             rotate(45)
             fill(0,0,255)
             // this is the main body, drawn at 0,0 because we translated to that coordinate 
+            // ellipseMode(CORNER)
             ellipse(0,0,this.sizeX,this.sizeY)
         pop()
         fill(0,255,0)
-        rectMode(CENTER)
-
+        this.drawHitBoxes()
         // make rect to check borders 
         // strokeWeight(1)
         // stroke(1)
@@ -117,10 +117,13 @@ class SpinEnemy extends Enemy {
     }
     checkHealth(){
         if (this.health <= 0){
-            makeExplosions(center(this).x,center(this).y,15,this.sizeX*5) 
+            this.die();
+        }
+    }
+    die(){
+        makeExplosions(center(this).x,center(this).y,15,this.sizeX*5) 
             setShake(10,10)
             enemies = enemies.filter(enemy => enemy !== this)
-        }
     }
     
 }
