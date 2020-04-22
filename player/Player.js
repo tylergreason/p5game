@@ -14,6 +14,7 @@ class Player {
         this.gunArray = ['bullet','bomb']
         this.gunArrayPosition = 0, 
         this.aimAngle = -90,
+        this.moveAngle = 0, 
         this.gunType = this.gunArray[this.gunArrayPosition],
         players.push(this)
     }
@@ -74,27 +75,66 @@ class Player {
     }
 
     controls = () => {
-    // fix diagonal movement later to be like shooting directions 
-    if(keyIsDown(RIGHT_ARROW) || keyIsDown(keyCodes.d)){
-        this.pos.x += this.speed; 
+        this.movementControls()
+        this.shootingControls()
     }
-    if(keyIsDown(LEFT_ARROW) || keyIsDown(keyCodes.a)){
-        this.pos.x -= this.speed; 
-    }
-    if(keyIsDown(UP_ARROW) || keyIsDown(keyCodes.w)){
-        this.pos.y -= this.speed; 
-    }
-    if(keyIsDown(DOWN_ARROW) || keyIsDown(keyCodes.s)){
-        this.pos.y += this.speed; 
-    }
-    // shooting 
-    // check to see if this is reloaded 
-    if (keyIsDown(keys.space.keyCode)){
-        if (this.reloadCurrent === this.reloadMax){
-            this.shoot()
-            this.reloadCurrent = 0; 
+    
+    movementControls(){
+        // fix diagonal movement later to be like shooting directions 
+        // if(keyIsDown(RIGHT_ARROW) || keyIsDown(keyCodes.d)){
+
+        //     this.pos.x += this.speed; 
+        // }
+        // if(keyIsDown(LEFT_ARROW) || keyIsDown(keyCodes.a)){
+        //     this.pos.x -= this.speed; 
+        // }
+        // if(keyIsDown(UP_ARROW) || keyIsDown(keyCodes.w)){
+        //     this.pos.y -= this.speed; 
+        // }
+        // if(keyIsDown(DOWN_ARROW) || keyIsDown(keyCodes.s)){
+        //     this.pos.y += this.speed; 
+        // }
+        if (keyIsDown(keys.a.keyCode) && keyIsDown(keys.s.keyCode)){
+            this.moveAngle = 135
+            this.move()
+        }
+        else if (keyIsDown(keys.a.keyCode) && keyIsDown(keys.w.keyCode)){
+            this.moveAngle = 225
+            this.move()
+        }
+        else if (keyIsDown(keys.d.keyCode) && keyIsDown(keys.w.keyCode)){
+            this.moveAngle = 315
+            this.move()
+        }
+        else if (keyIsDown(keys.d.keyCode) && keyIsDown(keys.s.keyCode)){
+            this.moveAngle = 45
+            this.move()
+        }
+        else if (keyIsDown(keys.w.keyCode)){
+            this.moveAngle = 270
+            this.move()
+        }
+        else if (keyIsDown(keys.d.keyCode)){
+            this.moveAngle = 0
+            this.move()
+        }
+        else if (keyIsDown(keys.s.keyCode)){
+            this.moveAngle = 90
+            this.move()
+        }
+        else if (keyIsDown(keys.a.keyCode)){
+            this.moveAngle = 180
+            this.move()
         }
     }
+
+    shootingControls(){
+        if (keyIsDown(keys.space.keyCode)){
+            if (this.reloadCurrent === this.reloadMax){
+                this.shoot()
+                this.reloadCurrent = 0; 
+            }
+        }
         if (keyIsDown(keys.j.keyCode) && keyIsDown(keys.k.keyCode)){
             this.aimAngle = 135
         }
@@ -120,16 +160,22 @@ class Player {
             this.aimAngle = 180
         }
     }
+
     shoot = () => {
-            
-            // given an angle, find the x and y vector the bullet should follow
-            if (this.gunType === 'bullet'){
-                new Bullet(center(this).x+cos(this.aimAngle)+5,center(this).y+sin(this.aimAngle)+5,this.aimAngle)
-            }
-            if (this.gunType === 'bomb'){
-                new Bomb(this.pos.x,this.pos.y,this.aimAngle)
-                // console.log(thisBombs)
-            }
+        // make a variable for the distance from the player's center that the weapon fires 
+        let distance = 25; 
+        if (this.gunType === 'bullet'){
+            new Bullet(center(this).x+cos(this.aimAngle)*distance,center(this).y+sin(this.aimAngle)*distance,this.aimAngle)
+        }
+        if (this.gunType === 'bomb'){
+            new Bomb(center(this).x+cos(this.aimAngle)*distance,center(this).y+sin(this.aimAngle)*distance,this.aimAngle)
+            // console.log(thisBombs)
+        }
+    }
+
+    move(){
+        this.pos.x+=cos(this.moveAngle)*this.speed
+        this.pos.y+=sin(this.moveAngle)*this.speed
     }
 
     collide(obj){
