@@ -16,6 +16,7 @@ class Player {
         this.aimAngle = -90,
         this.moveAngle = 0, 
         this.gunType = this.gunArray[this.gunArrayPosition],
+        this.aimControlLag = 0, 
         players.push(this)
     }
     center(){
@@ -115,6 +116,8 @@ class Player {
     }
 
     shootingControls(){
+        this.aimControlLag -=1; 
+        let aimControlLagVar = 3; 
         // press space to shoot and reset reloadCurrent
         if (keyIsDown(keys.space.keyCode)){
             if (this.reloadCurrent === this.reloadMax){
@@ -124,27 +127,33 @@ class Player {
         }
         if (keyIsDown(keys.j.keyCode) && keyIsDown(keys.k.keyCode)){
             this.aimAngle = 135
+            this.aimControlLag = aimControlLagVar; 
         }
         else if (keyIsDown(keys.j.keyCode) && keyIsDown(keys.i.keyCode)){
             this.aimAngle = 225
+            this.aimControlLag = aimControlLagVar; 
         }
         else if (keyIsDown(keys.l.keyCode) && keyIsDown(keys.i.keyCode)){
             this.aimAngle = 315
+            this.aimControlLag = aimControlLagVar; 
         }
         else if (keyIsDown(keys.l.keyCode) && keyIsDown(keys.k.keyCode)){
             this.aimAngle = 45
+            this.aimControlLag = aimControlLagVar; 
         }
-        else if (keyIsDown(keys.i.keyCode)){
-            this.aimAngle = 270
-        }
-        else if (keyIsDown(keys.l.keyCode)){
-            this.aimAngle = 0
-        }
-        else if (keyIsDown(keys.k.keyCode)){
-            this.aimAngle = 90
-        }
-        else if (keyIsDown(keys.j.keyCode)){
-            this.aimAngle = 180
+        if (this.aimControlLag<=0){
+            if (keyIsDown(keys.i.keyCode)){
+                this.aimAngle = 270
+            }
+            else if (keyIsDown(keys.l.keyCode)){
+                this.aimAngle = 0
+            }
+            else if (keyIsDown(keys.k.keyCode)){
+                this.aimAngle = 90
+            }
+            else if (keyIsDown(keys.j.keyCode)){
+                this.aimAngle = 180
+            }
         }
     }
 
