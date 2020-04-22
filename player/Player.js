@@ -10,23 +10,51 @@ class Player {
         this.centerY = this.pos.y+this.size/2,
         this.speed = 5, 
         this.reloadCurrent = 3,
-        this.gunArray = [{name:'bullet'}]
+        this.gunArray = [{name:Bullet.name, reload: Bullet.reload, reloadTimer:Bullet.reload}]
         this.gunArrayPosition = 0, 
         this.aimAngle = -90,
         this.moveAngle = 0, 
         this.gunType = this.gunArray[this.gunArrayPosition],
         this.aimControlLag = 0;
         // set first weapon to Bullet upon creating player 
-        this.setWeapon(Bomb)
+        // this.setWeapon(Bomb)
         players.push(this)
     }
 
     // make an instance function for setting the type of weapon at the current gunArray position 
     setWeapon(weapon, position=this.gunArrayPosition){
-        this.gunArray[position].name = weapon.name;
-        this.gunArray[position].reload = weapon.reload;
-        // allow player to fire the weapon immediately 
-        this.gunArray[position].reloadTimer = weapon.reload;
+        console.log(weapon)
+        // if the player has less than 3 weapons, add this to the gunArray instead of replacing the current weapon
+        if (this.gunArray.length < 3){
+            this.gunArray.push({
+                name:weapon.name, 
+                reload:weapon.reload,
+                reloadTimer:weapon.reload
+            })
+            return this.gunArrayPosition=this.gunArray.length-1;
+        }else{
+            // debugger
+            this.gunArray[position].name = weapon.name;
+            this.gunArray[position].reload = weapon.reload;
+            // allow player to fire the weapon immediately 
+            this.gunArray[position].reloadTimer = weapon.reload;
+        }
+    }
+
+    checkWeaponEquipped(){
+        // debugger
+        if (this.gunArray[this.gunArrayPosition] !== undefined){
+            return this.gunArray[this.gunArrayPosition]
+        }else{
+            return false 
+            // this.setWeapon(Bullet)
+        }
+    }
+
+    incrementReloadTimer(){
+        if (this.checkWeaponEquipped()){
+            this.gunArray[this.gunArrayPosition].reloadTimer +=1 
+        }
     }
 
     center(){
@@ -38,9 +66,9 @@ class Player {
     update(){
         this.controls()
         this.bounds()
+        this.incrementReloadTimer()
         // moved to display.js
         // this.drawStats()
-        this.gunType.reloadTimer +=1 
         this.show()
     }
 
@@ -79,7 +107,9 @@ class Player {
         textSize(26) 
         fill(0)
         text(`HP: ${this.health}`, 10,32)   
-        text(`Weapon: ${this.gunType.name}`, 10,64)
+        if (this.checkWeaponEquipped()){
+            text(`Weapon: ${this.gunArray[this.gunArrayPosition].name}`, 10,64)
+        }
     }
 
     controls = () => {

@@ -44,5 +44,5 @@ class Bomb {
         }
     }
 }
-
+Bomb.name = 'Bomb'
 Bomb.reload = 30; 

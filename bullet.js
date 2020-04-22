@@ -87,5 +87,5 @@ class Bullet{
     }
 }
 // static class variables 
-Bullet.name = 'bullet';
+Bullet.name = 'Bullet';
 Bullet.reload = 5; 
