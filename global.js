@@ -57,12 +57,7 @@ const center = obj => {
     }
 }
 
-const rectCenter = obj => {
-    return {
-        x:obj.pos.x+obj.sizeX/2,
-        y:obj.pos.y+obj.sizeY/2
-    }
-}
+
 
 
 
@@ -106,4 +101,3 @@ function spawnEnemy(enemy){
         return new SpinEnemy(random(0,canvasWidth),random(0,canvasHeight));  
     }
 }
-

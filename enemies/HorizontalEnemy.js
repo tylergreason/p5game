@@ -50,14 +50,14 @@ class HorizontalEnemy extends Enemy{
         rect(this.pos.x,this.pos.y,this.sizeX, this.sizeY,20)
         rectMode(CENTER)
         fill((this.timer*5))
-        ellipse(rectCenter(this).x,rectCenter(this).y,this.timer-20)
+        ellipse(center(this).x,center(this).y,this.timer-20)
         // this.drawHitBoxes()
     }
 
     fire(){
         if (this.timer % this.fireRate === 0){
             // fire bullet 
-            let bullet = new HorizontalEnemyBullet(rectCenter(this).x,rectCenter(this).y,center(player).x,center(player).y,1,200)
+            let bullet = new HorizontalEnemyBullet(center(this).x,center(this).y,center(player).x,center(player).y,1,200)
             this.timer = 0; 
         }
     }

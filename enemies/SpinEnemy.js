@@ -80,7 +80,7 @@ class SpinEnemy extends Enemy {
         fill(0,255,0)
         ellipseMode(CORNER)
         rectMode(CORNER)
-        this.drawHitBoxes()
+        // this.drawHitBoxes()
         
         // reset ellipse and rect draw modes 
     }
