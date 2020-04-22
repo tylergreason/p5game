@@ -9,15 +9,22 @@ class Player {
         this.centerX = this.pos.x+this.size/2,
         this.centerY = this.pos.y+this.size/2,
         this.speed = 5, 
-        this.reloadMax = 5, 
         this.reloadCurrent = 3,
-        this.gunArray = ['bullet','bomb']
+        this.gunArray = [{name:'bullet'},{name:'bomb'}]
         this.gunArrayPosition = 0, 
         this.aimAngle = -90,
         this.moveAngle = 0, 
         this.gunType = this.gunArray[this.gunArrayPosition],
         this.aimControlLag = 0, 
         players.push(this)
+    }
+
+    // make an instance function for setting the type of weapon at the current gunArray position 
+    setWeapon(weapon, position=this.gunArrayPosition){
+        this.gunArray[position].name = weapon.name;
+        this.gunArray[position].reload = weapon.reload;
+        // allow player to fire the weapon immediately 
+        this.gunArrayPosition[position].reloadTimer = weapon.reload;
     }
 
     center(){
@@ -32,9 +39,6 @@ class Player {
         // moved to display.js
         // this.drawStats()
         this.reloadCurrent +=1; 
-        if (this.reloadCurrent >= this.reloadMax){
-            this.reloadCurrent=this.reloadMax
-        }
         this.show()
     }
 
@@ -73,7 +77,7 @@ class Player {
         textSize(26) 
         fill(0)
         text(`HP: ${this.health}`, 10,32)   
-        text(`Weapon: ${this.gunType}`, 10,64)
+        text(`Weapon: ${this.gunType.name}`, 10,64)
     }
 
     controls = () => {
@@ -118,13 +122,10 @@ class Player {
 
     shootingControls(){
         this.aimControlLag -=1; 
-        let aimControlLagVar = 3; 
+        let aimControlLagVar = 2; 
         // press space to shoot and reset reloadCurrent
         if (keyIsDown(keys.space.keyCode)){
-            if (this.reloadCurrent === this.reloadMax){
                 this.shoot()
-                this.reloadCurrent = 0; 
-            }
         }
         if (keyIsDown(keys.j.keyCode) && keyIsDown(keys.k.keyCode)){
             this.aimAngle = 135
@@ -161,11 +162,17 @@ class Player {
     shoot = () => {
         // make a variable for the distance from the player's center that the weapon fires 
         let distance = 25; 
-        if (this.gunType === 'bullet'){
-            new Bullet(center(this).x+cos(this.aimAngle)*distance,center(this).y+sin(this.aimAngle)*distance,this.aimAngle)
+        if (this.gunType.name === 'bullet'){
+            if (this.reloadCurrent >= Bullet.reload){
+                new Bullet(center(this).x+cos(this.aimAngle)*distance,center(this).y+sin(this.aimAngle)*distance,this.aimAngle)
+                this.reloadCurrent = 0; 
+            }
         }
-        if (this.gunType === 'bomb'){
-            new Bomb(center(this).x+cos(this.aimAngle)*distance,center(this).y+sin(this.aimAngle)*distance,this.aimAngle)
+        if (this.gunType.name === 'bomb'){
+            if (this.reloadCurrent >= Bomb.reload){
+                new Bomb(center(this).x+cos(this.aimAngle)*distance,center(this).y+sin(this.aimAngle)*distance,this.aimAngle)
+                this.reloadCurrent = 0; 
+            }
         }
     }
 

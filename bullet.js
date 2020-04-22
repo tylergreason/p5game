@@ -86,3 +86,6 @@ class Bullet{
         }
     }
 }
+// static class variables 
+Bullet.name = 'bullet';
+Bullet.reload = 5; 

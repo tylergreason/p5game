@@ -44,3 +44,5 @@ class Bomb {
         }
     }
 }
+
+Bomb.reload = 3; 
