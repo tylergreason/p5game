@@ -54,23 +54,10 @@ class HorizontalEnemy extends Enemy{
         // this.drawHitBoxes()
     }
 
-    drawHitBoxes(){
-        rectMode(CORNER)
-        this.hitBoxes.forEach(hitBox => {
-            if (hitBox.shape === 'rect'){
-                return rect(this.pos.x+hitBox.x,this.pos.y+hitBox.y,hitBox.sizeX,hitBox.sizeY)
-            }
-            if(hitBox.shape === 'circle'){
-                return ellipse(this.pos.x+hitBox.x,this.pos.y+hitBox.y,hitBox.sizeX,hitBox.sizeY)
-            }
-        })
-    }
-
-
     fire(){
         if (this.timer % this.fireRate === 0){
             // fire bullet 
-            let bullet = new EnemyBullet(rectCenter(this).x,rectCenter(this).y,center(player).x,center(player).y)
+            let bullet = new HorizontalEnemyBullet(rectCenter(this).x,rectCenter(this).y,center(player).x,center(player).y,1,200)
             this.timer = 0; 
         }
     }

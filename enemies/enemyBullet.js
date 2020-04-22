@@ -10,20 +10,29 @@ class EnemyBullet{
         this.angle = findAngle(this.yDestination,this.yOrigin,this.xDestination,this.xOrigin)
         this.speed=10,
         this.size=10,
-        this.damage=5,
+        this.sizeX=this.size,
+        this.sizeY=this.size,
+        this.damage=1,
         this.shape = 'circle',
         enemyBullets.push(this)
     }
     update(){
         this.bounds()
-        this.pos.x+=cos(this.angle)*this.speed; 
-        this.pos.y+=sin(this.angle)*this.speed;
+        this.move()
+        this.collide()
         this.show()
     }
     show(){
         fill(200,0,0)
-        ellipse(this.pos.x,this.pos.y,20,20)
+        ellipseMode(CORNER)
+        ellipse(this.pos.x,this.pos.y,this.sizeX,this.sizeY)
     }
+
+    move(){
+        this.pos.x+=cos(this.angle)*this.speed; 
+        this.pos.y+=sin(this.angle)*this.speed;
+    }
+    
     bounds(){
         if(
             // collide right side bounds
@@ -40,6 +49,9 @@ class EnemyBullet{
         ){
             enemyBullets = enemyBullets.filter(obj => obj !== this)
         }
+    }
+
+    collide(){
         players.forEach(player => {
             if (player.collide(this)){
                 enemyBullets = enemyBullets.filter(obj => obj !== this)
@@ -47,12 +59,9 @@ class EnemyBullet{
                 player.damagePlayer(this.damage)
             }
         })
-        // if (collideCircleCircle(this.pos.x,this.pos.y,this.size,player.pos.x,player.pos.y,player.size)){
-        //     enemyBullets = enemyBullets.filter(obj => obj !== this)
-        //     makeExplosions(this.pos.x,this.pos.y,5,30)
-        //     players[0].health -= 5;
-        // }
+
     }
+    
     
 
 }

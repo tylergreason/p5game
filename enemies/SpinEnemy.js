@@ -79,13 +79,10 @@ class SpinEnemy extends Enemy {
         pop()
         fill(0,255,0)
         this.drawHitBoxes()
-        // make rect to check borders 
-        // strokeWeight(1)
-        // stroke(1)
-        // fill(0)
-        // rect(this.center().x,this.center().y,this.size,this.size)
-        // fill(255,255,255)
-        // rect(this.center().x,this.center().y,10,10)
+        
+        // reset ellipse and rect draw modes 
+        ellipseMode(CORNER)
+        rectMode(CORNER)
     }
     bounds(){
         // collide right side bounds

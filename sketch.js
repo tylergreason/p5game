@@ -6,10 +6,10 @@ function setup() {
   player = players[0]
   player.setWeapon(Bullet)
   // make new test enemy to test with 
-    new SpinEnemy(random(0,canvasWidth),random(0,canvasHeight),20); 
-    new SpinEnemy(random(0,canvasWidth),random(0,canvasHeight),20); 
-    new SpinEnemy(random(0,canvasWidth),random(0,canvasHeight),20); 
-    new SpinEnemy(random(0,canvasWidth),random(0,canvasHeight),20); 
+    // new SpinEnemy(random(0,canvasWidth),random(0,canvasHeight),20); 
+    // new SpinEnemy(random(0,canvasWidth),random(0,canvasHeight),20); 
+    // new SpinEnemy(random(0,canvasWidth),random(0,canvasHeight),20); 
+    // new SpinEnemy(random(0,canvasWidth),random(0,canvasHeight),20); 
     new SpinEnemy(random(0,canvasWidth),random(0,canvasHeight),20); 
     new HorizontalEnemy(random(0,canvasWidth),random(0,canvasHeight),'test'); 
     new HorizontalEnemy(random(0,canvasWidth),random(0,canvasHeight),'test'); 
