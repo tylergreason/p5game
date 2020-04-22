@@ -11,6 +11,7 @@ class HorizontalEnemy extends Enemy{
         this.health = 100;
         this.fireRate = 50; 
         this.timer = random(0,20);
+        this.hitBoxes.push({shape:'rect',x:0,y:0,sizeX:this.sizeX,sizeY:this.sizeY})
         enemies.push(this);
     }
     update(){
@@ -50,11 +51,23 @@ class HorizontalEnemy extends Enemy{
         rectMode(CENTER)
         fill((this.timer*5))
         ellipse(rectCenter(this).x,rectCenter(this).y,this.timer-20)
+        this.drawHitBoxes()
     }
+
+    drawHitBoxes(){
+        rectMode(CORNER)
+        this.hitBoxes.forEach(hitBox => {
+            if (hitBox.shape === 'rect'){
+                return rect(this.pos.x+hitBox.x,this.pos.y+hitBox.y,hitBox.sizeX,hitBox.sizeY)
+            }
+        })
+    }
+
+
     fire(){
         if (this.timer % this.fireRate === 0){
             // fire bullet 
-            let bullet = new EnemyBullet(rectCenter(this).x,rectCenter(this).y,player.pos.x,player.pos.y)
+            let bullet = new EnemyBullet(rectCenter(this).x,rectCenter(this).y,center(player).x,center(player).y)
             this.timer = 0; 
         }
     }
@@ -81,25 +94,4 @@ class HorizontalEnemy extends Enemy{
         }
     }
 
-    collide(obj){
-        // check if player bullet collided with this enemy 
-        if (obj.shape === 'circle'){
-            if (collideRectCircle(this.pos.x,this.pos.y,this.sizeX,this.sizeY,obj.pos.x,obj.pos.y,obj.size)){
-                console.log('collided with horz enemy')
-                obj.collision();
-                this.collision(obj)
-                return true 
-            }
-        }else if(obj.shape === 'rect'){
-            if (collideRectRect(this.pos.x,this.pos.y,this.sizeX,this.sizeY,obj.pos.x,obj.pos.y,obj.sizeX,obj.sizeY)){
-                console.log('collided with horz enemy')
-                obj.collision();
-                this.collision(obj)
-                return true 
-            }
-        }
-    }
-    collision(obj){
-        this.health -= obj.damage;
-    }
 }

@@ -13,6 +13,7 @@ class SpinEnemy extends Enemy {
         this.fireRate = 10,
         this.shape = 'circle',
         this.health = 10,
+        this.hitBoxes.push({shape:'circle',x:0,y:0,sizeX:this.sizeX,sizeY:this.sizeY}),
         enemies.push(this)
     }
     // method for getting center of enemy 
@@ -85,7 +86,6 @@ class SpinEnemy extends Enemy {
         // rect(this.center().x,this.center().y,this.size,this.size)
         // fill(255,255,255)
         // rect(this.center().x,this.center().y,10,10)
-
     }
     bounds(){
         // collide right side bounds

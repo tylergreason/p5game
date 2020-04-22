@@ -61,12 +61,6 @@ class Player {
         }
     }
 
-    center(){
-        return {
-            x:this.pos.x+this.size/2,
-            y:this.pos.y+this.size/2
-        }
-    }
     update(){
         this.controls()
         this.bounds()

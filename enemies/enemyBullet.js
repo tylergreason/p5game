@@ -4,13 +4,13 @@ class EnemyBullet{
         this.xOrigin=xOrigin,
         this.yOrigin=yOrigin,
         this.pos = createVector(this.xOrigin,this.yOrigin),
-        this.aimVariance = 50,
+        this.aimVariance = 20,
         this.xDestination=xDestination+random(this.aimVariance*-1,this.aimVariance),
         this.yDestination=yDestination+random(this.aimVariance*-1,this.aimVariance),
         this.speed=10,
         this.size=10,
         this.damage=5,
-        this.shape = 'rect',
+        this.shape = 'circle',
         enemyBullets.push(this)
     }
     center(){
