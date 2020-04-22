@@ -1,9 +1,12 @@
 
-class SpinEnemy { 
+class SpinEnemy extends Enemy { 
     constructor(x,y){
+        super(x,y)
         this.pos = createVector(x,y),
         this.speed = 5,
-        this.size=20,
+        this.size=30,
+        this.sizeX=this.size,
+        this.sizeY=this.size,
         this.timer = 0,
         this.angle=270,
         this.rotate=0,
@@ -14,7 +17,7 @@ class SpinEnemy {
     }
     // method for getting center of enemy 
     center(){
-        return createVector(this.pos.x+(this.size/2),this.pos.y+(this.size/2))
+        return createVector(this.pos.x+(this.sizeX/2),this.pos.y+(this.sizeY/2))
     }
     update(){
         this.checkHealth()
@@ -70,7 +73,7 @@ class SpinEnemy {
             rotate(45)
             fill(0,0,255)
             // this is the main body, drawn at 0,0 because we translated to that coordinate 
-            ellipse(0,0,this.size,this.size)
+            ellipse(0,0,this.sizeX,this.sizeY)
         pop()
         fill(0,255,0)
         rectMode(CENTER)
@@ -86,25 +89,25 @@ class SpinEnemy {
     }
     bounds(){
         // collide right side bounds
-        if((this.center().x+this.size/2) > canvasWidth){
+        if((this.center().x+this.sizeX/2) > canvasWidth){
             this.angle = random(91,269)
         }
         // collide left side bounds
-        if (this.center().x-this.size/2 < 0){
+        if (this.center().x-this.sizeX/2 < 0){
             this.angle = random(271,449)
         }
         // collide bottom side bounds
-        if(this.center().y+this.size/2 > canvasHeight){
+        if(this.center().y+this.sizeY/2 > canvasHeight){
             this.angle = random(181,359)
         } 
         // collide top side bounds
-        if (this.center().y-this.size/2 < 0){
+        if (this.center().y-this.sizeY/2 < 0){
             this.angle = random(1,179)
         }
     }
     // increase rotation 
     rotateBody(){
-        this.rotate+=3;
+        this.rotate+=5;
     }
     fire(){
         if (this.timer % this.fireRate === 0){
@@ -114,9 +117,10 @@ class SpinEnemy {
     }
     checkHealth(){
         if (this.health <= 0){
-            makeExplosions(center(this).x,center(this).y,15,this.size*10) 
+            makeExplosions(center(this).x,center(this).y,15,this.sizeX*5) 
             setShake(10,10)
             enemies = enemies.filter(enemy => enemy !== this)
         }
     }
+    
 }

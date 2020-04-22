@@ -80,4 +80,26 @@ class HorizontalEnemy extends Enemy{
             this.pos.y += 1
         }
     }
+
+    collide(obj){
+        // check if player bullet collided with this enemy 
+        if (obj.shape === 'circle'){
+            if (collideRectCircle(this.pos.x,this.pos.y,this.sizeX,this.sizeY,obj.pos.x,obj.pos.y,obj.size)){
+                console.log('collided with horz enemy')
+                obj.collision();
+                this.collision(obj)
+                return true 
+            }
+        }else if(obj.shape === 'rect'){
+            if (collideRectRect(this.pos.x,this.pos.y,this.sizeX,this.sizeY,obj.pos.x,obj.pos.y,obj.sizeX,obj.sizeY)){
+                console.log('collided with horz enemy')
+                obj.collision();
+                this.collision(obj)
+                return true 
+            }
+        }
+    }
+    collision(obj){
+        this.health -= obj.damage;
+    }
 }

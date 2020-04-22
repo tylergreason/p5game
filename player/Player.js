@@ -11,7 +11,7 @@ class Player {
         this.centerY = this.pos.y+this.size/2,
         this.speed = 5, 
         this.reloadCurrent = 3,
-        this.gunArray = [{name:Bullet.name, reload: Bullet.reload, reloadTimer:Bullet.reload}]
+        this.gunArray = []
         this.gunArrayPosition = 0, 
         this.aimAngle = -90,
         this.moveAngle = 0, 
@@ -260,10 +260,8 @@ class Player {
     // check to see if the player is able to fire their weapon 
     gunReloaded(){
         if(this.gunType.reloadTimer >= this.gunType.reload){
-            console.log('true')
             return true 
         }
-        console.log('false')
     }
     move(){
         this.pos.x+=cos(this.moveAngle)*this.speed
