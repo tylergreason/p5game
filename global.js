@@ -97,3 +97,13 @@ function setFill(obj){
 function findAngle(yDestination,yOrigin,xDestination,xOrigin){
     return atan2(yDestination-yOrigin,xDestination-xOrigin)
 }
+
+function spawnEnemy(enemy){
+    if (enemy === 'horizontalEnemy'){
+        return new HorizontalEnemy(random(0,canvasWidth),random(0,canvasHeight)); 
+    }
+    if (enemy === 'spinEnemy'){
+        return new SpinEnemy(random(0,canvasWidth),random(0,canvasHeight));  
+    }
+}
+

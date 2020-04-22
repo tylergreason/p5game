@@ -12,8 +12,7 @@ class SpinEnemy extends Enemy {
         this.fireRate = 10,
         this.shape = 'circle',
         this.health = 10,
-        // had to edit the x and y coords of the hitbox to account for drawing this enemy from the center, not the corner: 
-        this.hitBoxes.push({shape:'circle',x:0+this.sizeX/2,y:0+this.sizeY/2,sizeX:this.sizeX,sizeY:this.sizeY}),
+        this.hitBoxes.push({shape:'circle',x:0,y:0,sizeX:this.sizeX,sizeY:this.sizeY}),
         enemies.push(this)
     }
     // method for getting center of enemy 
@@ -73,16 +72,17 @@ class SpinEnemy extends Enemy {
                             rect(80,0,60,10)
             rotate(45)
             fill(0,0,255)
+
             // this is the main body, drawn at 0,0 because we translated to that coordinate 
             // ellipseMode(CORNER)
             ellipse(0,0,this.sizeX,this.sizeY)
         pop()
         fill(0,255,0)
+        ellipseMode(CORNER)
+        rectMode(CORNER)
         this.drawHitBoxes()
         
         // reset ellipse and rect draw modes 
-        ellipseMode(CORNER)
-        rectMode(CORNER)
     }
     bounds(){
         // collide right side bounds
