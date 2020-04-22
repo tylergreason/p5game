@@ -78,7 +78,7 @@ class Player {
     // shooting 
     // check to see if this is reloaded 
     if (this.reloadCurrent === this.reloadMax){
-        if (keyIsDown(keys.space.keyCode)){
+        // if (keyIsDown(keys.space.keyCode)){
         if (keyIsDown(keys.j.keyCode) && keyIsDown(keys.k.keyCode)){
             this.shoot(135)
             this.reloadCurrent = 0; 
@@ -112,7 +112,7 @@ class Player {
             this.reloadCurrent = 0; 
         }
         }
-    }
+    // }
     }
     shoot = (angle) => {
         
