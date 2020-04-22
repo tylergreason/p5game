@@ -5,7 +5,8 @@ class Player {
         this.size = 20,
         this.sizeX=20,
         this.sizeY=20,
-        this.health = 100, 
+        this.maxHealth = 100, 
+        this.health = this.maxHealth, 
         this.centerX = this.pos.x+this.size/2,
         this.centerY = this.pos.y+this.size/2,
         this.speed = 5, 
@@ -31,13 +32,16 @@ class Player {
                 reload:weapon.reload,
                 reloadTimer:weapon.reload
             })
-            return this.gunArrayPosition=this.gunArray.length-1;
+            this.gunArrayPosition=this.gunArray.length-1;
+            this.gunType = this.gunArray[this.gunArrayPosition]
         }else{
             // debugger
             this.gunArray[position].name = weapon.name;
             this.gunArray[position].reload = weapon.reload;
             // allow player to fire the weapon immediately 
             this.gunArray[position].reloadTimer = weapon.reload;
+            this.gunType = this.gunArray[this.gunArrayPosition]
+
         }
     }
 
@@ -47,13 +51,13 @@ class Player {
             return this.gunArray[this.gunArrayPosition]
         }else{
             return false 
-            // this.setWeapon(Bullet)
         }
     }
 
     incrementReloadTimer(){
-        if (this.checkWeaponEquipped()){
-            this.gunArray[this.gunArrayPosition].reloadTimer +=1 
+        this.gunArray[this.gunArrayPosition].reloadTimer +=1 
+        if (this.gunType.reloadTimer >= this.gunType.reload){
+            this.gunType.reloadTimer = this.gunType.reload
         }
     }
 
@@ -106,10 +110,50 @@ class Player {
     drawStats(){
         textSize(26) 
         fill(0)
-        text(`HP: ${this.health}`, 10,32)   
-        if (this.checkWeaponEquipped()){
-            text(`Weapon: ${this.gunArray[this.gunArrayPosition].name}`, 10,64)
+        // text(`HP: ${this.health}`, 10,32)   
+        this.drawHealth(10,10,this.health,this.maxHealth)
+        // if (this.checkWeaponEquipped()){
+        //     text(`Weapon: ${this.gunArray[this.gunArrayPosition].name}`, 10,64)
+        // }
+        // loop through each weapon in the weapon array and draw them to the screen 
+        for (let i = 0; i<this.gunArray.length;i++){
+            let weapon = this.gunArray[i]
+            // debugger
+            this.drawWeapon(10,40+(i*30),weapon)
         }
+    }
+
+    drawHealth(x,y,current,max){
+        let barWidth = 100; 
+        let barHeight = 20; 
+        // draw background rect 
+        fill(0)
+        rect(x,y,barWidth,barHeight)
+        // find percent to fill bar 
+        let percent = (current/max)*barWidth; 
+        fill(255)
+        rect(x,y,percent,barHeight)
+        fill(255,0,0)
+        textSize(20)
+        text(`HP: ${current}`,x,y+barHeight)
+    }
+
+    drawWeapon(x,y,weapon){
+        noStroke()
+        let weaponBarWidth = 100; 
+        if (weapon === this.gunType){
+            fill(212, 217, 69)
+            rect(x-5,y-5,weaponBarWidth+10,20+10)
+        }
+        // debugger
+        let reloadPercent = (weapon.reloadTimer/weapon.reload)*weaponBarWidth;
+        fill(0) 
+        rect(x,y,weaponBarWidth,20)
+        fill(255,0,0)
+        rect(x,y,reloadPercent,20)
+        fill(255)
+        textSize(20)
+        text(weapon.name,x,y+18)
     }
 
     controls = () => {
@@ -191,23 +235,6 @@ class Player {
         }
     }
 
-    // shoot = () => {
-    //     // make a variable for the distance from the player's center that the weapon fires 
-    //     let distance = 25; 
-    //     if (this.gunType.name === 'bullet'){
-    //         if (this.reloadCurrent >= Bullet.reload){
-    //             new Bullet(center(this).x+cos(this.aimAngle)*distance,center(this).y+sin(this.aimAngle)*distance,this.aimAngle)
-    //             this.reloadCurrent = 0; 
-    //         }
-    //     }
-    //     if (this.gunType.name === 'bomb'){
-    //         if (this.reloadCurrent >= Bomb.reload){
-    //             new Bomb(center(this).x+cos(this.aimAngle)*distance,center(this).y+sin(this.aimAngle)*distance,this.aimAngle)
-    //             this.reloadCurrent = 0; 
-    //         }
-    //     }
-    // }
-
     shoot(){
         // make a variable for the distance from the player's center that the weapon fires 
         let distance = 25; 
@@ -256,22 +283,19 @@ class Player {
     switchWeapon(key){
         if (key === 'o'){
             this.gunArrayPosition += 1; 
-            console.log(this.gunType)
-            console.log(this.gunArrayPosition)
             if (this.gunArrayPosition >= this.gunArray.length){
                 this.gunArrayPosition = 0; 
             }
         }
         if (key === 'u'){
             this.gunArrayPosition -= 1; 
-            console.log(this.gunType)
             if (this.gunArrayPosition < 0){
                 this.gunArrayPosition = this.gunArray.length-1; 
             }
         }
         this.gunType = this.gunArray[this.gunArrayPosition]
+        console.log(this.gunType)
     }
-
 }
 
 Player.test = 'test'

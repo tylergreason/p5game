@@ -1,7 +1,7 @@
 function drawInfo(){
     drawFPS()
     drawPlayerStats()
-    drawInstructions()
+    // drawInstructions()
 }
 
 function drawPlayerStats(){
@@ -14,6 +14,6 @@ function drawFPS(){
 }
 
 function drawInstructions(){
-    textSize(16)
-    text('WASD to move, IJKL to aim, SPACE to shoot, U and O to switch weapons', 10,90)
+    // textSize(16)
+    // text('WASD to move, IJKL to aim, SPACE to shoot, U and O to switch weapons', 10,10)
 }
