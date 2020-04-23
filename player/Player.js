@@ -201,7 +201,7 @@ class Player {
         let aimControlLagVar = 2; 
         // press space to shoot and reset reloadCurrent
         if (keyIsDown(keys.space.keyCode)){
-                this.shoot()
+            this.shoot()
         }
         if (keyIsDown(keys.j.keyCode) && keyIsDown(keys.k.keyCode)){
             this.aimAngle = 135

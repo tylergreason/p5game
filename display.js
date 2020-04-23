@@ -1,7 +1,8 @@
 function drawInfo(){
     drawFPS()
     drawPlayerStats()
-    // drawInstructions()
+    document.getElementById('playerHealth').innerText = player.health
+
 }
 
 function drawPlayerStats(){

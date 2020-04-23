@@ -1,0 +1,17 @@
+body {
+    padding: 0px; 
+    margin: 0px;
+    display: flex; 
+    flex-wrap: wrap;
+}
+
+#info {
+    /* float:right; */
+}
+
+#sketch {
+    /* use canvas height and width (in global.js) for max width and height*/
+    max-height: 800px;
+    max-width: 800px;
+    border: 10px solid black;
+}

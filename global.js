@@ -1,3 +1,10 @@
+// prevent space bar from scrolling the page 
+window.addEventListener('keydown', function(e) {
+    if(e.keyCode == 32 && e.target == document.body) {
+      e.preventDefault();
+    }
+  });
+
 const canvasWidth = 800; 
 const canvasHeight = 800; 
 const backgroundColor = () => { background(200,200,200) }

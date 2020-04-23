@@ -7,6 +7,7 @@
     <style> body {padding: 0; margin: 0;} </style>
     <script src="p5/p5.js"></script>
     <script src="p5/p5.collide2d.js"></script>
+    
     <script src="global.js"></script>
     <script src="explosion.js"></script>
     <script src="./player/Player.js"></script>
@@ -26,9 +27,14 @@
     <script src="bomb.js"></script>
     <script src="display.js"></script>
     <script src="sketch.js"></script>
+
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <div>
+    <!-- create div to hold sketch canvas -->
+    <div id='sketch'></div>
+
+    <span id='info'>
       WASD to move, IJKL to aim, SPACE to shoot, U and O to switch weapons
       <br>
       This game is not complete. It's just a playground for game ideas. Enjoy! 
@@ -36,7 +42,8 @@
       <button id='spawnSpinEnemy'>Spawn Spin Enemy</button>
       <button id='spawnHorizontalEnemy'>Spawn Horizontal Enemy</button>
       <button id='spawnLobberEnemy'>Spawn Lobber Enemy</button>
-    </div>
+      <div id='playerHealth'></div>
+    </span>
 
   </body>
 </html>

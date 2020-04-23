@@ -1,7 +1,9 @@
 
 
 function setup() {
-  createCanvas(canvasWidth, canvasHeight)
+  // create canvas and append it to sketch div 
+  const sketch = createCanvas(canvasWidth, canvasHeight)
+  sketch.parent('sketch')
   angleMode(DEGREES)
   // make player 
   new Player(canvasWidth/2,canvasHeight/2)
@@ -93,4 +95,5 @@ window.onload = ()=>{
   document.getElementById('spawnSpinEnemy').onclick = () => spawnEnemy('spinEnemy')
   document.getElementById('spawnLobberEnemy').onclick = () => spawnEnemy('lobberEnemy')
   document.getElementById('spawnHorizontalEnemy').onclick = () => spawnEnemy('horizontalEnemy')
+  document.getElementById('playerHealth').innerText = player.health
 }
